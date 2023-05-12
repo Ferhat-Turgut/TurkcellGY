@@ -1,42 +1,58 @@
-﻿using Movies.Entities;
+﻿using Movies.Data.Data;
+using Movies.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Movies.Entities;
+using Movies.Data.Data;
+using Microsoft.EntityFrameworkCore;
 
 namespace Movies.Data.Repositories
 {
+    
     public class EFMovieRepository : IMovieRepository
     {
-        public Task CreateAsync(Movie entity)
+        private readonly MoviesDbContext moviesDbContext;
+        public void Create(Movie entity) 
         {
             throw new NotImplementedException();
         }
-
-        public Task DeleteAsync(int id)
+        public async Task CreateAsync(Movie entity)
         {
-            throw new NotImplementedException();
+            await moviesDbContext.Movies.AddAsync(entity);
+            await moviesDbContext.SaveChangesAsync();
         }
 
-        public Task<IList<Movie>> GetAllAsync()
+        public async Task DeleteAsync(int id)
         {
-            throw new NotImplementedException();
+            var product =await moviesDbContext.Movies.AsNoTracking().FirstOrDefaultAsync(m=>m.Id==id);
+            moviesDbContext.Movies.Remove(product);
+            await moviesDbContext.SaveChangesAsync();
         }
 
-        public Task<Movie> GetByIdAsync(int id)
+        public async Task<IList<Movie>> GetAllAsync()
         {
-            throw new NotImplementedException();
+            return await moviesDbContext.Movies.AsNoTracking().ToListAsync();
         }
 
-        public Task<IEnumerable<Movie>> SearchMoviesByTitlle(string tittle)
+        public async Task<Movie?> GetByIdAsync(int id)
         {
-            throw new NotImplementedException();
+            return await moviesDbContext.Movies.AsNoTracking().FirstOrDefaultAsync(m=>m.Id==id);
         }
 
-        public Task UpdateAsync(Movie entity)
+        public async Task<IEnumerable<Movie>> SearchMoviesByTitlle(string tittle)
         {
-            throw new NotImplementedException();
+            return await moviesDbContext.Movies.AsNoTracking()
+                                                .Where(m=>m.Name.Contains(tittle))
+                                                .ToListAsync();
+        }
+
+        public async Task UpdateAsync(Movie entity)
+        {
+            moviesDbContext.Movies.Update(entity);
+            await moviesDbContext.SaveChangesAsync();
         }
     }
 }
