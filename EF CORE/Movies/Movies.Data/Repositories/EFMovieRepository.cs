@@ -15,6 +15,10 @@ namespace Movies.Data.Repositories
     public class EFMovieRepository : IMovieRepository
     {
         private readonly MoviesDbContext moviesDbContext;
+        public EFMovieRepository(MoviesDbContext moviesDbContext) 
+        {
+            this.moviesDbContext = moviesDbContext;
+        }
         public void Create(Movie entity) 
         {
             throw new NotImplementedException();

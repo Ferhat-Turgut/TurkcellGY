@@ -4,22 +4,18 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Movies.Entities
+namespace Movies.Application.DTOs.Requests
 {
-    public class Movie:IEntity
+    public class UpdateMovieRequest
     {
         public int Id { get; set; }
         public string Name { get; set; }
         public DateTime? PublishDate { get; set; }
         public string? Poster { get; set; }
-        public int? Duration { get; set; }
+        public int? Duration { get; }
         public double? Rating { get; set; }
 
-        //Navigation Property:
+        public int? DirectorId { get; set; }
 
-        public Director? Director { get; set; }
-        public int? DirectorId { get; set; }    
-
-        public ICollection<MoviesPlayer> Players { get; set; }=new HashSet<MoviesPlayer>();
     }
 }

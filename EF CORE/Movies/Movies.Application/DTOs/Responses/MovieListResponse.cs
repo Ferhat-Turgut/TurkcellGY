@@ -1,12 +1,13 @@
-﻿using System;
+﻿using Movies.Entities;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Movies.Entities
+namespace Movies.Application.DTOs.Responses
 {
-    public class Movie:IEntity
+    public class MovieListResponse
     {
         public int Id { get; set; }
         public string Name { get; set; }
@@ -15,11 +16,7 @@ namespace Movies.Entities
         public int? Duration { get; set; }
         public double? Rating { get; set; }
 
-        //Navigation Property:
-
-        public Director? Director { get; set; }
-        public int? DirectorId { get; set; }    
-
-        public ICollection<MoviesPlayer> Players { get; set; }=new HashSet<MoviesPlayer>();
+        public string? DirectoryName { get; set; }
+        public string? Players { get; set; }
     }
 }
