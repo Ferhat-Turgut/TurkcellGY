@@ -77,6 +77,7 @@
             this.buttonPlayers.TabIndex = 1;
             this.buttonPlayers.Text = "Oyuncu İşlemleri";
             this.buttonPlayers.UseVisualStyleBackColor = true;
+            this.buttonPlayers.Click += new System.EventHandler(this.buttonPlayers_Click);
             // 
             // buttonDirectors
             // 

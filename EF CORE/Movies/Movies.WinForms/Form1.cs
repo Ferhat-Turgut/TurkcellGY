@@ -27,5 +27,11 @@ namespace Movies.WinForms
             FormDirectors formDirectors = new FormDirectors();
             formDirectors.Show();
         }
+
+        private void buttonPlayers_Click(object sender, EventArgs e)
+        {
+            FormPlayers formPlayers = new FormPlayers();
+            formPlayers.Show();
+        }
     }
 }
