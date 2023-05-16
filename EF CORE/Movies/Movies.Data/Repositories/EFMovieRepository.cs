@@ -60,7 +60,7 @@ namespace Movies.Data.Repositories
 
         public async Task addPlayerToMovie(int movieId,List<int> selectedPlayers) 
         {
-            var movie = await GetByIdAsync(movieId);
+            var movie = await moviesDbContext.Movies.FindAsync(movieId);
             selectedPlayers.ForEach(pl =>
                  movie.Players.Add(new MoviesPlayer
                  {

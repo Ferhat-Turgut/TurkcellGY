@@ -12,6 +12,6 @@ namespace Movies.Entities
         public Movie Movie { get; set; }
         public int PlayerId { get; set; }
         public Player Player { get; set; }
-        public string Role { get; set; }
+        public string? Role { get; set; }
     }
 }
