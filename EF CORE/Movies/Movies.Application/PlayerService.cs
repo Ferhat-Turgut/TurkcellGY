@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Movies.Application
 {
-    public class PlayerService
+    public class PlayerService : IPlayerService
     {
         private readonly IPlayerRepository repository;
 
@@ -19,28 +19,28 @@ namespace Movies.Application
             this.repository = playerRepository;
         }
 
-        public async Task <IEnumerable<PlayerListResponse>> GetPlayerLists()
+        public async Task<IEnumerable<PlayerListResponse>> GetPlayerLists()
         {
-            var players =await repository.GetAllAsync();
-            return players.Select(p => new PlayerListResponse 
+            var players = await repository.GetAllAsync();
+            return players.Select(p => new PlayerListResponse
             {
-                Id=p.Id,
-                Name=p.Name,
-                LastName=p.LastName,
-                Info=p.Info
+                Id = p.Id,
+                Name = p.Name,
+                LastName = p.LastName,
+                Info = p.Info
             });
         }
 
         public async Task<int> CreateNewPlayer(CreateNewPlayerRequset requset)
         {
-            Player player = new()  
+            Player player = new()
             {
-            Name= requset.Name,
-            LastName= requset.LastName,
-            Info= requset.Info
+                Name = requset.Name,
+                LastName = requset.LastName,
+                Info = requset.Info
             };
-           await repository.CreateAsync(player);
-           return player.Id;
+            await repository.CreateAsync(player);
+            return player.Id;
         }
         public async Task<SinglePlayerResponse> GetPlayerAsync(int id)
         {
@@ -53,17 +53,17 @@ namespace Movies.Application
             };
         }
 
-        public async Task UpdatePlayerAsync(UpdatePlayerRequest request) 
+        public async Task UpdatePlayerAsync(UpdatePlayerRequest request)
         {
-            var player = new Player() 
+            var player = new Player()
             {
-                Id=request.Id,
-                Name=request.Name,
-                LastName=request.LastName,
-                Info=request.Info
+                Id = request.Id,
+                Name = request.Name,
+                LastName = request.LastName,
+                Info = request.Info
             };
             await repository.UpdateAsync(player);
         }
-        
+
     }
 }

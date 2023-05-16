@@ -10,17 +10,23 @@ namespace Movies.WinForms
         {
             InitializeComponent();
         }
-
+        MovieService movieService;
         private async void Form1_Load(object sender, EventArgs e)
         {
             var db = new MoviesDbContext();
             var repository = new EFMovieRepository(db);
-            var movieService = new MovieService(repository);
+            movieService = new MovieService(repository);
 
-            var movieList =await movieService.GetAllMovies();
-            dataGridViewMovies.DataSource = movieList.ToList();
+            await fillMovieGrid();
 
         }
+
+        private async Task fillMovieGrid()
+        {
+            var movieList = await movieService.GetAllMovies();
+            dataGridViewMovies.DataSource = movieList.ToList();
+        }
+
 
         private void buttonDirectors_Click(object sender, EventArgs e)
         {
@@ -32,6 +38,17 @@ namespace Movies.WinForms
         {
             FormPlayers formPlayers = new FormPlayers();
             formPlayers.Show();
+        }
+
+        private void buttonAddNewMovie_Click(object sender, EventArgs e)
+        {
+            FormMovies formMovies = new FormMovies();
+            formMovies.Show();
+        }
+
+        private async void buttonRefresh_Click(object sender, EventArgs e)
+        {
+            await fillMovieGrid();
         }
     }
 }

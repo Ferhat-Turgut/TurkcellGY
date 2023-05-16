@@ -30,6 +30,8 @@
         {
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.dataGridViewMovies = new System.Windows.Forms.DataGridView();
+            this.buttonRefresh = new System.Windows.Forms.Button();
+            this.buttonAddNewMovie = new System.Windows.Forms.Button();
             this.buttonPlayers = new System.Windows.Forms.Button();
             this.buttonDirectors = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
@@ -53,10 +55,12 @@
             // 
             // splitContainer1.Panel2
             // 
+            this.splitContainer1.Panel2.Controls.Add(this.buttonRefresh);
+            this.splitContainer1.Panel2.Controls.Add(this.buttonAddNewMovie);
             this.splitContainer1.Panel2.Controls.Add(this.buttonPlayers);
             this.splitContainer1.Panel2.Controls.Add(this.buttonDirectors);
-            this.splitContainer1.Size = new System.Drawing.Size(715, 306);
-            this.splitContainer1.SplitterDistance = 193;
+            this.splitContainer1.Size = new System.Drawing.Size(717, 342);
+            this.splitContainer1.SplitterDistance = 215;
             this.splitContainer1.TabIndex = 0;
             // 
             // dataGridViewMovies
@@ -66,8 +70,28 @@
             this.dataGridViewMovies.Location = new System.Drawing.Point(0, 0);
             this.dataGridViewMovies.Name = "dataGridViewMovies";
             this.dataGridViewMovies.RowTemplate.Height = 25;
-            this.dataGridViewMovies.Size = new System.Drawing.Size(711, 189);
+            this.dataGridViewMovies.Size = new System.Drawing.Size(713, 211);
             this.dataGridViewMovies.TabIndex = 0;
+            // 
+            // buttonRefresh
+            // 
+            this.buttonRefresh.Location = new System.Drawing.Point(153, 56);
+            this.buttonRefresh.Name = "buttonRefresh";
+            this.buttonRefresh.Size = new System.Drawing.Size(137, 23);
+            this.buttonRefresh.TabIndex = 3;
+            this.buttonRefresh.Text = "Yenile";
+            this.buttonRefresh.UseVisualStyleBackColor = true;
+            this.buttonRefresh.Click += new System.EventHandler(this.buttonRefresh_Click);
+            // 
+            // buttonAddNewMovie
+            // 
+            this.buttonAddNewMovie.Location = new System.Drawing.Point(153, 27);
+            this.buttonAddNewMovie.Name = "buttonAddNewMovie";
+            this.buttonAddNewMovie.Size = new System.Drawing.Size(137, 23);
+            this.buttonAddNewMovie.TabIndex = 2;
+            this.buttonAddNewMovie.Text = "Yeni Film Ekle";
+            this.buttonAddNewMovie.UseVisualStyleBackColor = true;
+            this.buttonAddNewMovie.Click += new System.EventHandler(this.buttonAddNewMovie_Click);
             // 
             // buttonPlayers
             // 
@@ -93,7 +117,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(715, 306);
+            this.ClientSize = new System.Drawing.Size(717, 342);
             this.Controls.Add(this.splitContainer1);
             this.Name = "Form1";
             this.Text = "Form1";
@@ -113,5 +137,7 @@
         private DataGridView dataGridViewMovies;
         private Button buttonPlayers;
         private Button buttonDirectors;
+        private Button buttonRefresh;
+        private Button buttonAddNewMovie;
     }
 }
