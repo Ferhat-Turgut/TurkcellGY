@@ -8,6 +8,8 @@ var message = app.Configuration.GetSection("Message")["meet"];
 
 //app.MapGet("/", () => message);
 
+app.UseStaticFiles(); 
+
 app.UseRouting();
 app.MapControllerRoute("default","{controller=Home}/{action=Index}/{id?}");
 
