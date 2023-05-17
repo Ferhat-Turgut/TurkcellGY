@@ -1,0 +1,33 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width" />
+        <title>Index</title>
+    </head>
+    <body>
+        HTML
+
+        <p>İsim: @ViewBag.Name</p>
+        <p>Gün: @ViewBag.Day</p>
+        <p>Ay: @ViewBag.Month</p>
+        <p>Yıl: @ViewBag.Year</p>
+
+        @if (ViewBag.Month == 5)
+        {
+            <p>Mayıstayız...</p>
+        }
+    @foreach (var item in ViewBag.MonthList)
+    {
+        <ul>
+        @item
+        </ul>
+    }
+
+    
+    </body>
+</html>
