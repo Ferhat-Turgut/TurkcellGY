@@ -1,4 +1,6 @@
-﻿using System;
+﻿using CourseApp.Entities;
+using CourseApp.Services.Repositories;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,7 +8,9 @@ using System.Threading.Tasks;
 
 namespace CourseApp.Infrastructure.Repositories
 {
-    public interface ICourseRepository
+    public interface ICourseRepository:IRepository<Course>
     {
+        public IEnumerable<Course> GetCoursesByCategory(int categoryId);
+        public IEnumerable<Course> GetCoursesByName(string name);
     }
 }

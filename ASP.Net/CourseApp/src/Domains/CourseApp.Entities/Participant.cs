@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace CourseApp.Entities
 {
-    internal class Participant
+    internal class Participant:IEntity
     {
     }
 }

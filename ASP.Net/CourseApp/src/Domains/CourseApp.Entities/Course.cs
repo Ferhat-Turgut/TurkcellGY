@@ -15,7 +15,7 @@ namespace CourseApp.Entities
         public DateTime? EndDate { get; set; }
         public decimal? Price { get; set; }
         public int? TotalHours { get; set; }
-        public string ImageUrl { get; set; }
+        public string ImageUrl { get; set; }= "https://loremflickr.com/320/240";
         public byte? Rating { get; set; }
         public int? CategoryId { get; set; }
         public Category? Category { get; set; }

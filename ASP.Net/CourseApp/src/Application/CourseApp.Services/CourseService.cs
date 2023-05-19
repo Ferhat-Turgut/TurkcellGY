@@ -1,4 +1,7 @@
-﻿using CourseApp.DataTransferObjects.Responses;
+﻿using AutoMapper;
+using CourseApp.DataTransferObjects.Responses;
+using CourseApp.Infrastructure.Repositories;
+using CourseApp.Services.Extensions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,9 +12,20 @@ namespace CourseApp.Services
 {
     public class CourseService : ICourseService
     {
-        public IEnumerable<CourseDisplayResponse> GetCourseDisplayResponses()
+        private readonly ICourseRepository _repository;
+        private readonly IMapper _mapper;
+
+        public CourseService(ICourseRepository repository,IMapper mapper)
         {
-            throw new NotImplementedException();
+            _repository = repository;
+            _mapper = mapper;
+        }
+
+        public  IEnumerable<CourseDisplayResponse> GetCourseDisplayResponses()
+        {
+            var courses=_repository.GetAll();
+            var response = courses.ConvertToDisplayResponses(_mapper);
+            return response;
         }
     }
 }

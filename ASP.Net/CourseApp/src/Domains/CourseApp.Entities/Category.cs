@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace CourseApp.Entities
 {
-    public class Category
+    public class Category:IEntity
     {
     }
 }
