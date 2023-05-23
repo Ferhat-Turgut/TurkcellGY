@@ -26,6 +26,30 @@ namespace CourseApp.Infrastructure.Repositories
                 new()
                 {
                     Id= 3,Name="Course 3",Description="software",Price=1500,Rating=5,TotalHours=500
+                },
+                new()
+                {
+                    Id= 4,Name="Course 4",Description="sport2",Price=500,Rating=3,TotalHours=100
+                },
+                new()
+                {
+                    Id= 5,Name="Course 5",Description="music2",Price=1000,Rating=2,TotalHours=150
+                },
+                new()
+                {
+                    Id= 6,Name="Course 6",Description="software2",Price=1500,Rating=5,TotalHours=500
+                },
+                new()
+                {
+                    Id= 7,Name="Course 7",Description="sport3",Price=500,Rating=3,TotalHours=100
+                },
+                new()
+                {
+                    Id= 8,Name="Course 8",Description="music3",Price=1000,Rating=2,TotalHours=150
+                },
+                new()
+                {
+                    Id= 9,Name="Course 9",Description="software3",Price=1500,Rating=5,TotalHours=500
                 }
             };
         }

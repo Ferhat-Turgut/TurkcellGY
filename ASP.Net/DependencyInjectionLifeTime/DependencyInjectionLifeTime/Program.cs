@@ -1,16 +1,14 @@
-using CourseApp.Infrastructure.Repositories;
-using CourseApp.Services;
-using CourseApp.Services.Mappings;
+using DependencyInjectionLifeTime.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
-//Inversion Od Control (IoC)
-builder.Services.AddScoped<ICourseService,CourseService>();
-builder.Services.AddScoped<ICourseRepository,FakeCourseRepository>();
-builder.Services.AddAutoMapper(typeof(MapProfile));
+builder.Services.AddSingleton<ISingletonGuid,Singleton>();
+builder.Services.AddScoped<IScopedGuid,Scoped>();
+builder.Services.AddTransient<ITransientGuid,Transient>();
+builder.Services.AddTransient<GuidService>();
 
 var app = builder.Build();
 
