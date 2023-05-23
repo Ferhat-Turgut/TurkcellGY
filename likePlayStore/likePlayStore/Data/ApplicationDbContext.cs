@@ -13,12 +13,22 @@ namespace likePlayStore.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-     
+            modelBuilder.Entity<Application>().Property(a => a.Name)
+                                              .IsRequired()
+                                              .HasMaxLength(50);
+
+            modelBuilder.Entity<Category>().Property(c => c.Name)
+                                           .IsRequired()
+                                           .HasMaxLength(30);
+
+            modelBuilder.Entity<Producer>().Property(p => p.Developer)
+                                        .IsRequired()
+                                        .HasMaxLength(75);
+
 
             modelBuilder.Entity<Application>().HasOne(a => a.Producer)
                                     .WithMany(p => p.Applications)
-                                    .HasForeignKey(a => a.ProducerId)
-                                    .OnDelete(DeleteBehavior.SetNull);
+                                    .HasForeignKey(a => a.ProducerId);
 
             modelBuilder.Entity<ApplicationsCategories>().HasKey("ApplicationId", "CategoryId");
 
@@ -32,6 +42,11 @@ namespace likePlayStore.Data
                                          .WithOne(ac => ac.Category)
                                          .HasForeignKey(ac => ac.CategoryId)
                                          .OnDelete(DeleteBehavior.NoAction);
+
+            modelBuilder.Entity<Producer>().HasData(new Producer { Id = 1, Developer = " Twitter Dev.", Email = "support@twitter.com" });
+            modelBuilder.Entity<Category>().HasData(new Category { Id = 1, Name = "Sosyal Medya" });
+            modelBuilder.Entity<Application>().HasData(new Application { Id = 1, Name = "Twitter",Rating=4.5,DowloadCounter=150,IsInstalled=true,ProducerId=1 });
+            modelBuilder.Entity<ApplicationsCategories>().HasData(new ApplicationsCategories { ApplicationId = 1, CategoryId = 1 });
         }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

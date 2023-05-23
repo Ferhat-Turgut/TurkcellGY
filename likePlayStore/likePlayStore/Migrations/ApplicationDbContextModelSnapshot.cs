@@ -31,8 +31,7 @@ namespace likePlayStore.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Description")
-                        .HasMaxLength(300)
-                        .HasColumnType("nvarchar(300)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<long>("DowloadCounter")
                         .HasColumnType("bigint");
@@ -51,7 +50,7 @@ namespace likePlayStore.Migrations
                     b.Property<double>("Rating")
                         .HasColumnType("float");
 
-                    b.Property<DateTime>("ReleaseDate")
+                    b.Property<DateTime?>("ReleaseDate")
                         .HasColumnType("datetime2");
 
                     b.HasKey("Id");
@@ -59,6 +58,17 @@ namespace likePlayStore.Migrations
                     b.HasIndex("ProducerId");
 
                     b.ToTable("Applications");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            DowloadCounter = 150L,
+                            IsInstalled = true,
+                            Name = "Twitter",
+                            ProducerId = 1,
+                            Rating = 4.5
+                        });
                 });
 
             modelBuilder.Entity("likePlayStore.Models.ApplicationsCategories", b =>
@@ -74,6 +84,13 @@ namespace likePlayStore.Migrations
                     b.HasIndex("CategoryId");
 
                     b.ToTable("ApplicationsCategories");
+
+                    b.HasData(
+                        new
+                        {
+                            ApplicationId = 1,
+                            CategoryId = 1
+                        });
                 });
 
             modelBuilder.Entity("likePlayStore.Models.Category", b =>
@@ -95,6 +112,13 @@ namespace likePlayStore.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Categorys");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Name = "Sosyal Medya"
+                        });
                 });
 
             modelBuilder.Entity("likePlayStore.Models.Producer", b =>
@@ -106,8 +130,7 @@ namespace likePlayStore.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Biography")
-                        .HasMaxLength(500)
-                        .HasColumnType("nvarchar(500)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Developer")
                         .IsRequired()
@@ -121,6 +144,14 @@ namespace likePlayStore.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Producers");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Developer = " Twitter Dev.",
+                            Email = "support@twitter.com"
+                        });
                 });
 
             modelBuilder.Entity("likePlayStore.Models.Application", b =>
@@ -128,7 +159,7 @@ namespace likePlayStore.Migrations
                     b.HasOne("likePlayStore.Models.Producer", "Producer")
                         .WithMany("Applications")
                         .HasForeignKey("ProducerId")
-                        .OnDelete(DeleteBehavior.SetNull)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Producer");

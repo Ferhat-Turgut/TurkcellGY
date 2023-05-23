@@ -6,13 +6,13 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace likePlayStore.Migrations
 {
     /// <inheritdoc />
-    public partial class initdatabase : Migration
+    public partial class fixinit : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "Categories",
+                name: "Categorys",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -33,7 +33,7 @@ namespace likePlayStore.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Developer = table.Column<string>(type: "nvarchar(75)", maxLength: 75, nullable: false),
                     Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Biography = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: true)
+                    Biography = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -47,8 +47,8 @@ namespace likePlayStore.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
-                    ReleaseDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    Description = table.Column<string>(type: "nvarchar(300)", maxLength: 300, nullable: true),
+                    ReleaseDate = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Rating = table.Column<double>(type: "float", nullable: false),
                     DowloadCounter = table.Column<long>(type: "bigint", nullable: false),
                     IsInstalled = table.Column<bool>(type: "bit", nullable: false),
@@ -62,7 +62,7 @@ namespace likePlayStore.Migrations
                         column: x => x.ProducerId,
                         principalTable: "Producers",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.SetNull);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -86,6 +86,26 @@ namespace likePlayStore.Migrations
                         principalTable: "Categorys",
                         principalColumn: "Id");
                 });
+
+            migrationBuilder.InsertData(
+                table: "Categorys",
+                columns: new[] { "Id", "Description", "Name" },
+                values: new object[] { 1, null, "Sosyal Medya" });
+
+            migrationBuilder.InsertData(
+                table: "Producers",
+                columns: new[] { "Id", "Biography", "Developer", "Email" },
+                values: new object[] { 1, null, " Twitter Dev.", "support@twitter.com" });
+
+            migrationBuilder.InsertData(
+                table: "Applications",
+                columns: new[] { "Id", "Description", "DowloadCounter", "IsInstalled", "Name", "ProducerId", "Rating", "ReleaseDate" },
+                values: new object[] { 1, null, 150L, true, "Twitter", 1, 4.5, null });
+
+            migrationBuilder.InsertData(
+                table: "ApplicationsCategories",
+                columns: new[] { "ApplicationId", "CategoryId" },
+                values: new object[] { 1, 1 });
 
             migrationBuilder.CreateIndex(
                 name: "IX_Applications_ProducerId",
