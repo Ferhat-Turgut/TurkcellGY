@@ -9,15 +9,23 @@
     {
         if (columnCount!=0 && columnCount%4==0)
         {
-            @:<div><div class="row m-3">
+            @:</div><div class="row m-3">
         }
+
         <div class="col-3">
-
             <partial name="_CourseDisplay" model="courseDisplay"></partial>
-
         </div>
 
         columnCount++;
-        
     }
+</div>
+<div>
+    
+  <ul class="pagination pagination-lg">
+      @for (int i = 1; i <= ViewBag.TotalPage; i++)
+        {
+             <li class="page-item @(i==ViewBag.activePge? "active":"")"><a asp-action="Index" asp-route-pageNo="@i" class="page-link">@i</a></li>
+        }
+  </ul>
+
 </div>

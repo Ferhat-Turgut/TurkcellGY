@@ -16,10 +16,22 @@ namespace CourseApp.Mvc.Controllers
             _courseService = courseService;
         }
 
-        public IActionResult Index()
+        public IActionResult Index(int pageNo)
         {
             var courses = _courseService.GetCourseDisplayResponses();
-            return View(courses);
+
+            var courseCount= courses.Count();
+            var coursePerPage = 4;
+            var totalPage = Math.Ceiling((decimal)courseCount/coursePerPage);
+            ViewBag.TotalPage = totalPage;
+            ViewBag.activePge = pageNo;
+
+            var paginatedCourses = courses.OrderBy(c => c.Id)
+                                          .Skip((pageNo - 1) * coursePerPage)
+                                          .Take(coursePerPage)
+                                          .ToList();
+
+            return View(paginatedCourses);
         }
 
         public IActionResult Privacy()
