@@ -7,9 +7,12 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
-//Inversion Od Control (IoC)
 builder.Services.AddScoped<ICourseService,CourseService>();
 builder.Services.AddScoped<ICourseRepository,FakeCourseRepository>();
+builder.Services.AddScoped<ICategoryService,CategoryService>();
+builder.Services.AddScoped<ICategoryRepository,FakeCategoryRepository>();
+
+//Inversion Od Control (IoC)
 builder.Services.AddAutoMapper(typeof(MapProfile));
 
 var app = builder.Build();
