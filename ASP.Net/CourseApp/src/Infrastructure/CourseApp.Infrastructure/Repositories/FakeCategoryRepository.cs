@@ -14,8 +14,8 @@ namespace CourseApp.Infrastructure.Repositories
         public FakeCategoryRepository()
         {
             _categories = new() { 
-                new() {Id=1,Name="Music"},
-                new() {Id=2,Name="Spor"},
+                new() {Id=1,Name="Sport"},
+                new() {Id=2,Name="Music"},
                 new() {Id=3,Name="Programming"}
             };
         }
