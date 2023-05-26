@@ -11,5 +11,6 @@ namespace CourseApp.Services
     {
         IEnumerable<CourseDisplayResponse> GetCourseDisplayResponses();
         IEnumerable<CourseDisplayResponse> GetCourseByCategory(int categoryId);
+        CourseDisplayResponse GetCourse(int id);
     }
 }

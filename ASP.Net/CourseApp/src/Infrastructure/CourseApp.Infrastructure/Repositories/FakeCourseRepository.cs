@@ -56,7 +56,7 @@ namespace CourseApp.Infrastructure.Repositories
 
         public Course? Get(int id)
         {
-            throw new NotImplementedException();
+            return _courses.Find(c=>c.Id==id);
         }
 
         public IList<Course?> GetAll()

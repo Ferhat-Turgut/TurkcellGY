@@ -21,6 +21,12 @@ namespace CourseApp.Services
             _mapper = mapper;
         }
 
+        public CourseDisplayResponse GetCourse(int id)
+        {
+            var course = _repository.Get(id);
+            return _mapper.Map<CourseDisplayResponse>(course);
+        }
+
         public IEnumerable<CourseDisplayResponse> GetCourseByCategory(int categoryId)
         {
             var courses = _repository.GetCoursesByCategory(categoryId);

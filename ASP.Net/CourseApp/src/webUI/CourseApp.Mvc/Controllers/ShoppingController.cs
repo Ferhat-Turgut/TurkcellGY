@@ -1,16 +1,26 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using CourseApp.DataTransferObjects.Responses;
+using CourseApp.Services;
+using Microsoft.AspNetCore.Mvc;
 
 namespace CourseApp.Mvc.Controllers
 {
     public class ShoppingController : Controller
     {
+        private readonly ICourseService courseService;
+
+        public ShoppingController(ICourseService courseService)
+        {
+            this.courseService = courseService;
+        }
+
         public IActionResult Index()
         {
             return View();
         }
         public IActionResult AddCourse(int id)
         {
-            return Json(new { message = $"{id} id numaralı kurs, sepete eklenme talebiyle sunucuya gönderildi."} );
+            CourseDisplayResponse selectedCourse = courseService.GetCourse(id);
+            return Json(new { message = $"{selectedCourse.Name}  sepete eklendi."} );
         }
     }
 }
