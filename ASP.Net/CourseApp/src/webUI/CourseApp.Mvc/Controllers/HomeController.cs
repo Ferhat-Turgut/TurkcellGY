@@ -16,12 +16,12 @@ namespace CourseApp.Mvc.Controllers
             _courseService = courseService;
         }
 
-        public IActionResult Index(int pageNo=1,int categoryId=0)
+        public IActionResult Index(int pageNo=1,int? categoryId=null)
         {
-            //Eğer categoryId yoksa varsayılan olarak 0 alınır ve tüm liste courses'a atılır..
+            //Eğer categoryId yoksa varsayılan olarak null alınır ve tüm liste courses'a atılır..
             //Eğer categoryId varsa categoryId ye göre ilgili liste courses'a atılır. 
-            var courses =categoryId==0? _courseService.GetCourseDisplayResponses():
-                                        _courseService.GetCourseByCategory(categoryId);
+            var courses = categoryId == null? _courseService.GetCourseDisplayResponses():
+                                              _courseService.GetCourseByCategory(categoryId.Value);
 
             var courseCount= courses.Count();
             var coursePerPage = 4;

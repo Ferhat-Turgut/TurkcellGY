@@ -33,3 +33,24 @@
   </ul>
 
 </div>*@
+
+@section Scripts
+{
+    <script>
+        $(document).ready(function(){
+            $('.basket').on('click',function(){
+                let id=$(this).data('id');
+                $.ajax({
+                    url:'/Shopping/AddCourse/'+id,
+                    type:'GET',
+                    success:function(data){
+                    console.log(data);
+                    },
+                    error:function(err){
+                        console.log('Hata',error);
+                    }
+                })
+            });
+        });
+    </script>
+}
