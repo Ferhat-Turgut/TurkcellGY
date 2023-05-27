@@ -24,11 +24,14 @@ namespace CourseApp.Mvc.Controllers
         {
             CourseDisplayResponse selectedCourse = courseService.GetCourse(id);
             var courseItem = new CourseItem { Course = selectedCourse, Quantity = 1 };
-            return Json(new { message = $"{selectedCourse.Name}  sepete eklendi."} );
+            
 
+            
             CourseCollection courseCollection = getCourseCollectionFromSession();
             courseCollection.AddNewCourse(courseItem);
             saveToSession(courseCollection);
+
+            return Json(new { message = $"{selectedCourse.Name}  sepete eklendi." });
         }
 
         private CourseCollection getCourseCollectionFromSession()
@@ -38,11 +41,8 @@ namespace CourseApp.Mvc.Controllers
             {
                 return new CourseCollection();
             }
-            else
-            {
-                var collection = JsonSerializer.Deserialize<CourseCollection>(serializedString);
-                return collection;
-            }
+            var collection = JsonSerializer.Deserialize<CourseCollection>(serializedString);
+            return collection;
         }
         private void saveToSession(CourseCollection courseCollection)
         {
