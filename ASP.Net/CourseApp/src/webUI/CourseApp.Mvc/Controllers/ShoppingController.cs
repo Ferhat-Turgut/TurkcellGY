@@ -1,4 +1,5 @@
 ﻿using CourseApp.DataTransferObjects.Responses;
+using CourseApp.Mvc.Extensions;
 using CourseApp.Mvc.Models;
 using CourseApp.Services;
 using Microsoft.AspNetCore.Mvc;
@@ -36,21 +37,11 @@ namespace CourseApp.Mvc.Controllers
 
         private CourseCollection getCourseCollectionFromSession()
         {
-            var serializedString = HttpContext.Session.GetString("basket");
-            if (serializedString==null)
-            {
-                return new CourseCollection();
-            }
-            var collection = JsonSerializer.Deserialize<CourseCollection>(serializedString);
-            return collection;
+            return HttpContext.Session.GetJson<CourseCollection>("basket") ?? new CourseCollection();
         }
         private void saveToSession(CourseCollection courseCollection)
         {
-            var serialized = JsonSerializer.Serialize<CourseCollection>(courseCollection);
-            if (!string.IsNullOrWhiteSpace(serialized))
-            {
-                HttpContext.Session.SetString("basket", serialized);
-            }
+            HttpContext.Session.SetJson<CourseCollection>("basket",courseCollection);
         }
     }
 }
