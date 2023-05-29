@@ -19,6 +19,22 @@ namespace CourseApp.Infrastructure.Repositories
                 new() {Id=3,Name="Programming"}
             };
         }
+
+        public Task CreateAsync(Category entity)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task DeleteAsync(Category entity)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task DeleteAsync(int id)
+        {
+            throw new NotImplementedException();
+        }
+
         public Category? Get(int id)
         {
             throw new NotImplementedException();
@@ -39,7 +55,17 @@ namespace CourseApp.Infrastructure.Repositories
             throw new NotImplementedException();
         }
 
+        public IList<Category> GetAllWithPredicate(Expression<Func<Category, bool>> predicate)
+        {
+            throw new NotImplementedException();
+        }
+
         public Task<Category?> GetAsync(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task UpdateAsync(Category entity)
         {
             throw new NotImplementedException();
         }

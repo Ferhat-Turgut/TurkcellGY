@@ -8,9 +8,12 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 
 builder.Services.AddScoped<ICourseService,CourseService>();
-builder.Services.AddScoped<ICourseRepository,FakeCourseRepository>();
+//builder.Services.AddScoped<ICourseRepository,FakeCourseRepository>();
+builder.Services.AddScoped<ICourseRepository,EFCourseRepository>();
+
 builder.Services.AddScoped<ICategoryService,CategoryService>();
-builder.Services.AddScoped<ICategoryRepository,FakeCategoryRepository>();
+//builder.Services.AddScoped<ICategoryRepository,FakeCategoryRepository>();
+builder.Services.AddScoped<ICategoryRepository,EFCategoryRepository>();
 
 //Inversion Od Control (IoC)
 builder.Services.AddAutoMapper(typeof(MapProfile));
