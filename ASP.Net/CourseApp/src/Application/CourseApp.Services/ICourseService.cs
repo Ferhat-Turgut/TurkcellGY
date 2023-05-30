@@ -1,4 +1,5 @@
-﻿using CourseApp.DataTransferObjects.Responses;
+﻿using CourseApp.DataTransferObjects.Requests;
+using CourseApp.DataTransferObjects.Responses;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,5 +13,6 @@ namespace CourseApp.Services
         IEnumerable<CourseDisplayResponse> GetCourseDisplayResponses();
         IEnumerable<CourseDisplayResponse> GetCourseByCategory(int categoryId);
         CourseDisplayResponse GetCourse(int id);
+        Task CreateNewCourseAsync(CreateNewCourseRequest createNewCourseRequest);
     }
 }
