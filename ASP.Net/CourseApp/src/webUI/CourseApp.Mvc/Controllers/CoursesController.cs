@@ -1,13 +1,15 @@
 ﻿using CourseApp.DataTransferObjects.Requests;
 using CourseApp.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace CourseApp.Mvc.Controllers
 {
+    [Authorize(Roles ="Admin,Editor")]
     public class CoursesController : Controller
     {
-
+       
         private readonly ICourseService courseService;
         private readonly ICategoryService categoryService;
 
@@ -16,13 +18,14 @@ namespace CourseApp.Mvc.Controllers
             this.courseService = courseService;
             this.categoryService = categoryService;
         }
-
+        // [AllowAnonymous] [Authorize] ile kısıtlanan controller'da, anonim girişlerde ilgili action'a erişim izni verir .
         public IActionResult Index()
         {
             var courses = courseService.GetCourseDisplayResponses();
             return View(courses);
         }
-   
+
+        //[Authorize] Kısıtlama hem controller'da hem action'da kullanılabilir.
         public async Task<IActionResult> Create()
         {
             ViewBag.Categories = getCategoriesForSelectList();
