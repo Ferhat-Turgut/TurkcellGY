@@ -1,0 +1,56 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.4.33205.214
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{A50F288F-82F6-4F0C-9F57-9F1FF5888916}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Application", "Application", "{C4306320-2CAE-44E3-BAB9-0C0C75068A2F}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Domains", "Domains", "{3497BAC9-0B81-40CB-A8F3-E265273E8105}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastructure", "{67D1DAFF-9076-4195-91A2-C2BFC6864C4A}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "webUI", "webUI", "{7486AA6F-86B3-4D3F-9879-EA8C2A8480F1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CareerApp.Mvc", "src\webUI\CareerApp.Mvc\CareerApp.Mvc.csproj", "{975E54D2-9B8A-4B40-9FA7-350FFC6645C3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CareerApp.Entities", "src\Domains\CareerApp.Entities\CareerApp.Entities.csproj", "{6E18782C-E14E-420E-AC37-927C8A2F293D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CareerApp.Infrastructure", "src\Infrastructure\CareerApp.Infrastructure\CareerApp.Infrastructure.csproj", "{B4074485-1D49-4D07-BF39-89EAB42616E4}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{975E54D2-9B8A-4B40-9FA7-350FFC6645C3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{975E54D2-9B8A-4B40-9FA7-350FFC6645C3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{975E54D2-9B8A-4B40-9FA7-350FFC6645C3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{975E54D2-9B8A-4B40-9FA7-350FFC6645C3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6E18782C-E14E-420E-AC37-927C8A2F293D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6E18782C-E14E-420E-AC37-927C8A2F293D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6E18782C-E14E-420E-AC37-927C8A2F293D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6E18782C-E14E-420E-AC37-927C8A2F293D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B4074485-1D49-4D07-BF39-89EAB42616E4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B4074485-1D49-4D07-BF39-89EAB42616E4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B4074485-1D49-4D07-BF39-89EAB42616E4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B4074485-1D49-4D07-BF39-89EAB42616E4}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{C4306320-2CAE-44E3-BAB9-0C0C75068A2F} = {A50F288F-82F6-4F0C-9F57-9F1FF5888916}
+		{3497BAC9-0B81-40CB-A8F3-E265273E8105} = {A50F288F-82F6-4F0C-9F57-9F1FF5888916}
+		{67D1DAFF-9076-4195-91A2-C2BFC6864C4A} = {A50F288F-82F6-4F0C-9F57-9F1FF5888916}
+		{7486AA6F-86B3-4D3F-9879-EA8C2A8480F1} = {A50F288F-82F6-4F0C-9F57-9F1FF5888916}
+		{975E54D2-9B8A-4B40-9FA7-350FFC6645C3} = {7486AA6F-86B3-4D3F-9879-EA8C2A8480F1}
+		{6E18782C-E14E-420E-AC37-927C8A2F293D} = {3497BAC9-0B81-40CB-A8F3-E265273E8105}
+		{B4074485-1D49-4D07-BF39-89EAB42616E4} = {67D1DAFF-9076-4195-91A2-C2BFC6864C4A}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {607FD466-C3EF-4A47-A9AE-921F385615FF}
+	EndGlobalSection
+EndGlobal
