@@ -14,8 +14,16 @@ namespace CareerApp.Entities
         public string Name { get; set; }
         [Required, MaxLength(20)]
         public string Surname { get; set; }
+        [Required,MaxLength(20)]
+        public string Username { get; set; }
+        [Required]
+        public string Password { get; set; }
         [Required]
         public int Age { get; set; }
+        [EmailAddress(ErrorMessage = "Lütfen geçerli bir email adresi girin.")]
+        public string? Email { get; set; }
+        [Phone(ErrorMessage = "Lütfen geçerli bir telefon numarası girin.")]
+        public string? PhoneNumber { get; set; }
 
         public int GenderId { get; set; }
         public Gender Gender { get; set; }
