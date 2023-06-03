@@ -4,6 +4,7 @@ using CareerApp.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CareerApp.Infrastructure.Migrations
 {
     [DbContext(typeof(CareerAppDbContext))]
-    partial class CareerAppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230603111731_init fix2(JobPostingAddCityColumn)")]
+    partial class initfix2JobPostingAddCityColumn
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -21,23 +24,6 @@ namespace CareerApp.Infrastructure.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
-
-            modelBuilder.Entity("CareerApp.Entities.City", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("City");
-                });
 
             modelBuilder.Entity("CareerApp.Entities.Company", b =>
                 {
@@ -47,11 +33,11 @@ namespace CareerApp.Infrastructure.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("Biography")
+                    b.Property<string>("Address")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("CityId")
-                        .HasColumnType("int");
+                    b.Property<string>("Biography")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Email")
                         .HasColumnType("nvarchar(max)");
@@ -68,7 +54,7 @@ namespace CareerApp.Infrastructure.Migrations
                     b.Property<string>("PhoneNumber")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("RoleId")
+                    b.Property<int?>("RoleId")
                         .HasColumnType("int");
 
                     b.Property<string>("Username")
@@ -77,8 +63,6 @@ namespace CareerApp.Infrastructure.Migrations
                         .HasColumnType("nvarchar(20)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("CityId");
 
                     b.HasIndex("RoleId");
 
@@ -128,8 +112,9 @@ namespace CareerApp.Infrastructure.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("CityId")
-                        .HasColumnType("int");
+                    b.Property<string>("City")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("CompanyId")
                         .HasColumnType("int");
@@ -156,8 +141,6 @@ namespace CareerApp.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("CityId");
-
                     b.HasIndex("CompanyId");
 
                     b.HasIndex("JobId");
@@ -174,9 +157,6 @@ namespace CareerApp.Infrastructure.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<int>("Age")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("CityId")
                         .HasColumnType("int");
 
                     b.Property<string>("Email")
@@ -200,7 +180,7 @@ namespace CareerApp.Infrastructure.Migrations
                     b.Property<string>("PhoneNumber")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("RoleId")
+                    b.Property<int?>("RoleId")
                         .HasColumnType("int");
 
                     b.Property<string>("Surname")
@@ -214,8 +194,6 @@ namespace CareerApp.Infrastructure.Migrations
                         .HasColumnType("nvarchar(20)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("CityId");
 
                     b.HasIndex("GenderId");
 
@@ -276,29 +254,15 @@ namespace CareerApp.Infrastructure.Migrations
 
             modelBuilder.Entity("CareerApp.Entities.Company", b =>
                 {
-                    b.HasOne("CareerApp.Entities.City", "City")
-                        .WithMany()
-                        .HasForeignKey("CityId");
-
                     b.HasOne("CareerApp.Entities.Role", "Role")
                         .WithMany()
-                        .HasForeignKey("RoleId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("City");
+                        .HasForeignKey("RoleId");
 
                     b.Navigation("Role");
                 });
 
             modelBuilder.Entity("CareerApp.Entities.JobPosting", b =>
                 {
-                    b.HasOne("CareerApp.Entities.City", "City")
-                        .WithMany()
-                        .HasForeignKey("CityId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("CareerApp.Entities.Company", "Company")
                         .WithMany("JobPostings")
                         .HasForeignKey("CompanyId")
@@ -311,8 +275,6 @@ namespace CareerApp.Infrastructure.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("City");
-
                     b.Navigation("Company");
 
                     b.Navigation("Job");
@@ -320,10 +282,6 @@ namespace CareerApp.Infrastructure.Migrations
 
             modelBuilder.Entity("CareerApp.Entities.JobSeeker", b =>
                 {
-                    b.HasOne("CareerApp.Entities.City", "City")
-                        .WithMany()
-                        .HasForeignKey("CityId");
-
                     b.HasOne("CareerApp.Entities.Gender", "Gender")
                         .WithMany()
                         .HasForeignKey("GenderId")
@@ -336,11 +294,7 @@ namespace CareerApp.Infrastructure.Migrations
 
                     b.HasOne("CareerApp.Entities.Role", "Role")
                         .WithMany()
-                        .HasForeignKey("RoleId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("City");
+                        .HasForeignKey("RoleId");
 
                     b.Navigation("Gender");
 

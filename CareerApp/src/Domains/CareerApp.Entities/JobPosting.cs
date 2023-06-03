@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace CareerApp.Entities
 {
-    public class JobPosting
+    public class JobPosting : IEntity
     {
         public int Id { get; set; }
         [Required, MaxLength(25)]
@@ -18,6 +18,9 @@ namespace CareerApp.Entities
         public bool Status { get; set; } = true;
         [Required]
         public DateTime ListingDate { get; set; }
+
+        public int CityId { get; set; }
+        public City City { get; set; }
         public int CompanyId { get; set; }
         public Company Company { get; set; }
         public int JobId { get; set; }

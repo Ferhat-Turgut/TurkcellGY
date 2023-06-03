@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace CareerApp.Entities
 {
-    public class Job
+    public class Job:IEntity
     {
         public int Id { get; set; }
         [Required,MaxLength(30)]

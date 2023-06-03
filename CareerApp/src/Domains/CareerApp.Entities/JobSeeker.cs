@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace CareerApp.Entities
 {
-    public class JobSeeker
+    public class JobSeeker : IEntity
     {
         public int Id { get; set; }
         [Required, MaxLength(20)]
@@ -25,12 +25,14 @@ namespace CareerApp.Entities
         [Phone(ErrorMessage = "Lütfen geçerli bir telefon numarası girin.")]
         public string? PhoneNumber { get; set; }
 
+        public int? CityId { get; set; }
+        public City? City { get; set; }
         public int GenderId { get; set; }
         public Gender Gender { get; set; }
         public int? JobId { get; set; }
         public Job? Job { get; set; }
-        public int? RoleId { get; set; }
-        public Role? Role { get; set; }
+        public int RoleId { get; set; }
+        public Role Role { get; set; }
         public IEnumerable<Recourse>? MyProperty { get; set; }
     }
 }

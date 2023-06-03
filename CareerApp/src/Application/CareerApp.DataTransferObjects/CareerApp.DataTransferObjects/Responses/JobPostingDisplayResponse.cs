@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CareerApp.Entities;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -9,16 +10,19 @@ namespace CareerApp.DataTransferObjects.Responses
 {
     public class JobPostingDisplayResponse
     {
+        public int Id { get; set; }
         public string Tittle { get; set; }
         public string? Description { get; set; }
         public string? Terms { get; set; }
-        [Required]
         public bool Status { get; set; } = true;
-        [Required]
         public DateTime ListingDate { get; set; }
-        //public int CompanyId { get; set; }
-        //public Company Company { get; set; }
-        //public int JobId { get; set; }
-        //public Job Job { get; set; }
+
+        public City CityId { get; set; }
+        public string City { get; set; }
+        public int CompanyId { get; set; }
+        public string Company { get; set; }
+        public int JobId { get; set; }
+        public string Job { get; set; }
+
     }
 }

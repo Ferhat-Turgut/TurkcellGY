@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace CareerApp.Entities
 {
-    public class Recourse
+    public class Recourse : IEntity
     {
         public int Id { get; set; }
         [Required]

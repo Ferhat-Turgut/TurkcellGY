@@ -4,6 +4,7 @@ using CareerApp.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CareerApp.Infrastructure.Migrations
 {
     [DbContext(typeof(CareerAppDbContext))]
-    partial class CareerAppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230603112429_init fix4(addedCityTableAndColumn)")]
+    partial class initfix4addedCityTableAndColumn
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

@@ -9,6 +9,6 @@ namespace CareerApp.Services
 {
     public interface IJobPostingService
     {
-        public IEnumerable<JobPostingDisplayResponse> GetJobPostingDisplayResponses { get; set; }
+        public IEnumerable<JobPostingDisplayResponse> GetJobPostingDisplayResponses();
     }
 }
