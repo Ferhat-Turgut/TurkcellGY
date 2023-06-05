@@ -5,12 +5,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CareerApp.Entities.Concrete
+namespace CareerApp.Entities
 {
-    public class Job
+    public class City:IEntity
     {
         [Key]
-        public int Id  { get; set; }
+        public int Id { get; set; }
         public string Name { get; set; }
     }
 }

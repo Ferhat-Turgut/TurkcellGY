@@ -20,12 +20,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Abstract\" />
-    <Folder Include="Repositories\" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\..\Domains\CareerApp.Entities\CareerApp.EntityLayer.csproj" />
+    <ProjectReference Include="..\..\Domains\CareerApp.Entities\CareerApp.Entities.csproj" />
   </ItemGroup>
 
 </Project>
