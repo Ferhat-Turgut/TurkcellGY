@@ -1,23 +1,8 @@
-﻿@model IEnumerable<JobPostingDisplayResponse>
-@{
+﻿@{
     ViewData["Title"] = "Home Page";
 }
 
-<div class="row">
-    @foreach (var jobPosting in Model)
-    {
-        <div class="col-3">
-            <div class="card">
-                <div class="card-body">
-                    <h4 class="card-title">@jobPosting.Tittle</h4>
-                    <p class="card-text">@jobPosting.City</p>
-                    <p class="card-text">@jobPosting.Company</p>
-                    <p class="card-text">@jobPosting.Job</p>
-                    <p class="card-text">@jobPosting.ListingDate</p>
-                    <button class="btn btn-success basket" data-id="@jobPosting.Id">Sepete ekle</button>
-                </div>
-
-            </div>
-        </div>
-    }
+<div class="text-center">
+    <h1 class="display-4">Welcome</h1>
+    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
 </div>

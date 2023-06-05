@@ -1,5 +1,4 @@
 ﻿using CareerApp.Mvc.Models;
-using CareerApp.Services;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 
@@ -8,18 +7,15 @@ namespace CareerApp.Mvc.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-        private readonly IJobPostingService _jobPostingService;
 
-        public HomeController(ILogger<HomeController> logger,IJobPostingService jobPostingService)
+        public HomeController(ILogger<HomeController> logger)
         {
             _logger = logger;
-            _jobPostingService= jobPostingService;
         }
 
         public IActionResult Index()
         {
-            var jobPosting = _jobPostingService.GetJobPostingDisplayResponses();
-            return View(jobPosting);
+            return View();
         }
 
         public IActionResult Privacy()

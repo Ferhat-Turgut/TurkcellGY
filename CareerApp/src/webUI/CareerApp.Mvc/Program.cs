@@ -1,17 +1,7 @@
-using AutoMapper;
-using CareerApp.Infrastructure.Repositories;
-using CareerApp.Services;
-using CareerApp.Services.Mappings;
-
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
-
-builder.Services.AddScoped<IJobPostingService, JobPostingService>();
-builder.Services.AddScoped<IJobPostingRepository, JobPostingRepository>();
-builder.Services.AddAutoMapper(typeof(MapProfile));
-
 
 var app = builder.Build();
 
