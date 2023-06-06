@@ -24,5 +24,21 @@ namespace CareerApp.Services.Extensions
         {
             return mapper.Map<IEnumerable<RecourseDisplayResponse>>(recourses);
         }
+        public static IEnumerable<RecourseDisplayResponse> ConvertToDisplayResponses(this IEnumerable<Recourse> recourses, IMapper mapper)
+        {
+            return mapper.Map<IEnumerable<RecourseDisplayResponse>>(recourses);
+        }
+
+        public static IEnumerable<JobSeekerDisplayResponse> ConvertToDto(this IEnumerable<JobSeeker> jobSeekers, IMapper mapper)
+        {
+            return mapper.Map<IEnumerable<JobSeekerDisplayResponse>>(jobSeekers);
+        }
+
+        public static IEnumerable<JobSeekerDisplayResponse> ConvertToDisplayResponses(this IEnumerable<JobSeeker> jobSeekers, IMapper mapper)
+        {
+            return mapper.Map<IEnumerable<JobSeekerDisplayResponse>>(jobSeekers);
+        }
+
+
     }
 }

@@ -15,11 +15,8 @@ namespace CareerApp.DataTransferObject.Responses
         public string Tittle { get; set; }
         public DateTime ListingDate { get; set; }
 
-        public int CityId { get; set; }
         public City City { get; set; }
-        public int CompanyId { get; set; }
         public Company Company { get; set; }
-        public int JobId { get; set; }
         public Job Job { get; set; }
 
     }
