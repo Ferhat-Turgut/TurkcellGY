@@ -11,12 +11,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Extensions\" />
-    <Folder Include="Mappings\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\..\Infrastructure\CareerApp.Infrastructure\CareerApp.Infrastructure.csproj" />
+    <ProjectReference Include="..\CareerApp.DataTransferObject\CareerApp.DataTransferObject.csproj" />
   </ItemGroup>
 
 </Project>

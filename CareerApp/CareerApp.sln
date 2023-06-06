@@ -17,11 +17,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CareerApp.Entities", "src\D
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CareerApp.Infrastructure", "src\Infrastructure\CareerApp.Infrastructure\CareerApp.Infrastructure.csproj", "{B4074485-1D49-4D07-BF39-89EAB42616E4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CareerApp.Mvc", "src\webUI\CareerApp.Mvc\CareerApp.Mvc.csproj", "{7D052763-18FD-4930-A86D-C750C5390D1A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CareerApp.Mvc", "src\webUI\CareerApp.Mvc\CareerApp.Mvc.csproj", "{7D052763-18FD-4930-A86D-C750C5390D1A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CareerApp.Services", "src\Application\CareerApp.Services\CareerApp.Services.csproj", "{143A40E2-6BB2-4098-A551-F81A944B8B47}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CareerApp.Services", "src\Application\CareerApp.Services\CareerApp.Services.csproj", "{143A40E2-6BB2-4098-A551-F81A944B8B47}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CareerApp.DataTransferObject", "src\Application\CareerApp.DataTransferObject\CareerApp.DataTransferObject.csproj", "{3E22244A-948C-4572-B80E-2711A5156829}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CareerApp.DataTransferObject", "src\Application\CareerApp.DataTransferObject\CareerApp.DataTransferObject.csproj", "{3E22244A-948C-4572-B80E-2711A5156829}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
