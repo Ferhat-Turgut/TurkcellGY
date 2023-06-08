@@ -23,6 +23,10 @@ namespace CareerApp.Services
 
         void UpdateJobSeeker(UpdateJobSeekerRequest updateJobSeekerRequest);
         Task UpdateJobSeekerAsync(UpdateJobSeekerRequest updateJobSeekerRequest);
+        bool  IsJobSeekerExist(string JobSeekerUsername,string password);
+
+        void DeleteJobSeeker(int id);
+        Task DeleteJobSeekerAsync(int id);
 
     }
 }

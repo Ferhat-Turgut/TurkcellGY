@@ -34,6 +34,15 @@ namespace CareerApp.Services
             await _repository.CreateAsync(jobSeeker);
         }
 
+        public void DeleteJobSeeker(int id)
+        {
+            _repository.Delete(id);
+        }
+
+        public async Task DeleteJobSeekerAsync(int id)
+        {
+            await _repository.DeleteAsync(id);
+        }
 
         public JobSeekerDisplayResponse GetJobSeeker(int id)
         {
@@ -59,6 +68,31 @@ namespace CareerApp.Services
             var jobSeekers = await _repository.GetAllAsync();
             var responses = jobSeekers.ConvertToDisplayResponses(_mapper);
             return responses;
+        }
+
+        public UpdateJobSeekerRequest GetJobSeekerForUpdate(int id)
+        {
+            var jobSeeker = _repository.Get(id);
+            return _mapper.Map<UpdateJobSeekerRequest>(jobSeeker);
+        }
+
+        public async Task<UpdateJobSeekerRequest> GetJobSeekerForUpdateAsync(int id)
+        {
+            var jobSeeker = await _repository.GetAsync(id);
+            return _mapper.Map<UpdateJobSeekerRequest>(jobSeeker);
+        }
+
+        public bool IsJobSeekerExist(string JobSeekerUsername, string password)
+        {
+            var IsExist = _repository.IsJobSeekerExist(JobSeekerUsername, password);
+            if (IsExist!=0)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
 
         public void UpdateJobSeeker(UpdateJobSeekerRequest updateJobSeekerRequest)

@@ -1,16 +1,15 @@
-﻿using System;
+﻿using CareerApp.Entities;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CareerApp.Entities
+namespace CareerApp.DataTransferObject.Requests
 {
-    public class Company:IEntity
+    public class CreateNewCompanyRequest
     {
-        [Key]
-        public int Id { get; set; }
         [Required, MaxLength(50)]
         public string Name { get; set; }
         [Required, MaxLength(20)]
@@ -23,9 +22,6 @@ namespace CareerApp.Entities
         public string Address { get; set; }
 
         public int RoleId { get; set; }
-        public Role Role { get; set; }
 
-        public IEnumerable<JobPosting>? JobPostings { get; set; }
-        public IEnumerable<Recourse>? Recourses { get; set; }
     }
 }

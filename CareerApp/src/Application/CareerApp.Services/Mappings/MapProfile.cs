@@ -15,14 +15,19 @@ namespace CareerApp.Services.Mappings
         public MapProfile()
         {
             CreateMap<JobPosting, JobPostingDisplayResponse>();
+            CreateMap<CreateNewJobPostingRequest, JobPosting>();
             CreateMap<UpdateJobPostingRequest, JobPosting>().ReverseMap();
-            CreateMap<CreateNewJobPostingRequest, JobPosting>().ReverseMap();
 
             CreateMap<Recourse, RecourseDisplayResponse>();
-            CreateMap<CreateNewJobPostingRequest, JobPosting>().ReverseMap();
+            CreateMap<CreateNewRecourseRequest, Recourse>();
 
+            CreateMap<JobSeeker, JobSeekerDisplayResponse>();
+            CreateMap<CreateNewJobSeekerRequest, JobSeeker>();
+            CreateMap<UpdateJobSeekerRequest, JobSeeker>().ReverseMap();
 
-
+            CreateMap<Company, CompanyDisplayResponse>();
+            CreateMap<CreateNewCompanyRequest, Company>();
+            CreateMap<UpdateCompanyRequest, Company>().ReverseMap();
 
         }
     }

@@ -1,12 +1,36 @@
 
+using CareerApp.Infrastructure.Data;
+using CareerApp.Infrastructure.Repositories;
+using CareerApp.Mvc.Controllers;
+using CareerApp.Services;
 using CareerApp.Services.Mappings;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.Extensions.DependencyInjection;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
+
+builder.Services.AddDbContext<CareerAppDbContext>();
+
+builder.Services.AddScoped<ICompanyRepository,EFCompanyRepository>();
+builder.Services.AddScoped<IJobSeekerRepository,EFJobSeekerRepository>();
+builder.Services.AddScoped<IJobPostingRepository,EFJobPostingRepository>();
+builder.Services.AddScoped<IRecourseRepository,EFRecourseRepository>();
+builder.Services.AddScoped<ICityRepository,EFCityRepository>();
+builder.Services.AddScoped<IJobRepository,EFJobRepository>();
+
+builder.Services.AddScoped<ICompanyService, CompanyService>();
+builder.Services.AddScoped<IJobSeekerService, JobSeekerService>();
+builder.Services.AddScoped<IJobPostingService, JobPostingService>();
+builder.Services.AddScoped<IRecourseServices, RecourseService>();
+builder.Services.AddScoped<ICityService, CityService>();
+builder.Services.AddScoped<IJobService, JobService>();
+
 builder.Services.AddAutoMapper(typeof(MapProfile));
+
 
 var app = builder.Build();
 

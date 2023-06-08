@@ -1,0 +1,54 @@
+﻿@using CareerApp.Mvc.Views.Home;
+@model JobAndCityList
+
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+</head>
+<body>
+    <h2>İşveren Girişi</h2>
+    <form action="/Login/CompanyLogin" method="POST">
+        <div class="form-group">
+            <input type="text" class="form-control" id="username" name="username" required placeholder="Kullanıcı Adı">
+        </div>
+        <div class="form-group">
+            <input type="password" class="form-control" id="password" name="password" required placeholder="Şifre">
+        </div>
+        <button type="submit" class="btn btn-primary">Giriş Yap</button>
+    </form>
+
+    <h2>Yeni İşveren Kaydı</h2>
+    <form action="/Register/NewCompany" method="POST">
+        <div class="form-group">
+            <input type="text" class="form-control" id="name" name="name" required placeholder="İsim">
+        </div>
+        
+        <div class="form-group">
+            <input type="text" class="form-control" id="username" name="username" required placeholder="Kullanıcı Adı">
+        </div>
+        <div class="form-group">
+            <input type="password" class="form-control" id="password" name="password" required placeholder="Şifre">
+        </div>
+        
+        <div class="form-group">
+            <input type="email" class="form-control" id="email" name="email"  placeholder="Email">
+        </div>
+        <div class="form-group">
+            <input type="tel" class="form-control" id="phone" name="phone"  placeholder="Telefon Numarası">
+        </div>
+
+        <div class="form-group">
+            <textarea style="width: 100%; height: 100%;" id="biography" name="biography" placeholder="Biyografinizi ekleyin"></textarea>
+        </div>
+
+        <div class="form-group">
+            <input type="text" class="form-control" id="address" name="address"  placeholder="Adres">
+        </div>
+
+
+        <button type="submit" class="btn btn-primary">Kayıt Ol</button>
+    </form>
+
+</body>
+</html>

@@ -11,5 +11,8 @@ namespace CareerApp.Infrastructure.Repositories
     {
         public IEnumerable<JobSeeker> GetJobSeekersByJob(int jobId);
         public Task<IEnumerable<JobSeeker>> GetJobSeekersByJobAsync(int jobId);
+     
+        public int IsJobSeekerExist(string jobSeekerUsername,string password);
+        public Task<int> IsJobSeekerExistAsync(string jobSeekerUsername,string password);
     }
 }

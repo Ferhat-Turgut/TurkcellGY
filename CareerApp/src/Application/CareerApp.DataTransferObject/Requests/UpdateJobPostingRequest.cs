@@ -10,7 +10,8 @@ namespace CareerApp.DataTransferObject.Requests
 {
     public class UpdateJobPostingRequest
     {
-  
+        [Key]
+        public int Id { get; set; }
         public string Tittle { get; set; }
         public string? Description { get; set; }
         public string? Terms { get; set; }

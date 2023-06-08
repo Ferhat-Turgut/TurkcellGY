@@ -83,5 +83,35 @@ namespace CareerApp.Infrastructure.Repositories
         {
             return await careerAppDbContext.JobSeekers.AsNoTracking().Where(j => j.JobId == jobId).ToListAsync();
         }
+
+        public int IsJobSeekerExist(string jobSeekerUsername, string password)
+        {
+            var jobSeeker = careerAppDbContext.JobSeekers.SingleOrDefault(j=>j.Username==jobSeekerUsername && j.Password==password);
+            if (jobSeeker!=null)
+            {
+                return jobSeeker.Id;
+            }
+            else
+            {
+                //Bulunamayan her kayıt için 0 id sini geri yollayıp kontrol edeceğiz.
+                return 0;
+            }
+        }
+
+        public async Task<int> IsJobSeekerExistAsync(string jobSeekerUsername, string password)
+        {
+            var jobSeeker =await careerAppDbContext.JobSeekers.SingleOrDefaultAsync(j => j.Username == jobSeekerUsername && j.Password == password);
+            if (jobSeeker != null)
+            {
+                return jobSeeker.Id;
+            }
+            else
+            {
+                //Bulunamayan her kayıt için 0 id sini geri yollayıp kontrol edeceğiz.
+                return 0;
+            }
+        }
+
+
     }
 }
