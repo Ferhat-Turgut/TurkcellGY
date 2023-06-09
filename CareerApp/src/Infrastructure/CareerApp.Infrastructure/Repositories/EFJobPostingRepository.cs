@@ -44,16 +44,16 @@ namespace CareerApp.Infrastructure.Repositories
             await careerAppDbContext.SaveChangesAsync();
         }
 
-        public JobPosting? Get(int id)
+        public JobPosting Get(int id)
         {
             return careerAppDbContext.JobPostings.SingleOrDefault(j => j.Id == id);
         }
 
-        public async Task<JobPosting?> GetAsync(int id)
+        public async Task<JobPosting> GetAsync(int id)
         {
             return await careerAppDbContext.JobPostings.SingleOrDefaultAsync(j=>j.Id==id);
         }
-        public IList<JobPosting?> GetAll()
+        public IList<JobPosting> GetAll()
         {
             return careerAppDbContext.JobPostings.AsNoTracking().ToList();
         }

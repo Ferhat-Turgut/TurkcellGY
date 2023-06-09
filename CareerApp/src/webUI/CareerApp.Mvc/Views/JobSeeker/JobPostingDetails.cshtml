@@ -1,0 +1,24 @@
+﻿@using CareerApp.DataTransferObject.Responses;
+@model JobPostingDisplayResponse
+
+
+<form method="post" action="@Url.Action("CreateNewRecourse", new { jobPostingId = Model.Id })">
+    <div style="border:solid 1px black;">
+        <h4>@Model.Tittle.ToUpper()</h4>
+        <p>Açıklama: @Model.Description</p>
+        <p>Şartlar: @Model.Terms</p>
+        <p>Meslek: @Model.Job.Name</p>
+        <p>Şehir: @Model.City.Name</p>
+        <p>İlan Tarihi: @Model.ListingDate</p>
+        <p>İlan Numarası: @Model.Id</p>
+        @if (Model.Status == true)
+        {
+            <p>İlan Durumu: Aktif</p>
+        }
+        else
+        {
+            <p>İlan Durumu: Pasif</p>
+        }
+        <button type="submit" class="btn btn-success">Başvuru Yap</button>
+    </div>
+</form>

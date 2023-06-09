@@ -4,6 +4,7 @@ using CareerApp.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CareerApp.Infrastructure.Migrations
 {
     [DbContext(typeof(CareerAppDbContext))]
-    partial class CareerAppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230608155054_fix relation")]
+    partial class fixrelation
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -782,7 +785,7 @@ namespace CareerApp.Infrastructure.Migrations
             modelBuilder.Entity("CareerApp.Entities.Company", b =>
                 {
                     b.HasOne("CareerApp.Entities.Role", "Role")
-                        .WithMany("Companies")
+                        .WithMany()
                         .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -828,7 +831,7 @@ namespace CareerApp.Infrastructure.Migrations
                         .HasForeignKey("JobId");
 
                     b.HasOne("CareerApp.Entities.Role", "Role")
-                        .WithMany("jobSeekers")
+                        .WithMany()
                         .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -886,13 +889,6 @@ namespace CareerApp.Infrastructure.Migrations
             modelBuilder.Entity("CareerApp.Entities.JobSeeker", b =>
                 {
                     b.Navigation("Recourses");
-                });
-
-            modelBuilder.Entity("CareerApp.Entities.Role", b =>
-                {
-                    b.Navigation("Companies");
-
-                    b.Navigation("jobSeekers");
                 });
 #pragma warning restore 612, 618
         }

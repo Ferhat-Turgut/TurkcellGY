@@ -112,6 +112,16 @@ namespace CareerApp.Infrastructure.Repositories
             }
         }
 
+        public JobSeeker GetJobSeekerByUsername(string username)
+        {
+            var jobSeeker= careerAppDbContext.JobSeekers.SingleOrDefault(j=>j.Username==username);
+            return jobSeeker;
+        }
 
+        public async Task<JobSeeker> GetJobSeekerByUsernameAsync(string username)
+        {
+            var jobSeeker =await careerAppDbContext.JobSeekers.SingleOrDefaultAsync(j => j.Username == username);
+            return jobSeeker;
+        }
     }
 }

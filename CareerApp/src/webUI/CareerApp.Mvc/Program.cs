@@ -31,6 +31,16 @@ builder.Services.AddScoped<IJobService, JobService>();
 
 builder.Services.AddAutoMapper(typeof(MapProfile));
 
+builder.Services.AddSession();
+
+
+
+builder.Services.AddSession(options =>
+{
+    options.Cookie.Name = "Username";
+    options.IdleTimeout = TimeSpan.FromMinutes(30);
+});
+
 
 var app = builder.Build();
 
@@ -44,6 +54,7 @@ if (!app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();
+app.UseSession();
 
 app.UseRouting();
 

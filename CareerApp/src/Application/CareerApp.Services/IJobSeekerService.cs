@@ -12,6 +12,8 @@ namespace CareerApp.Services
     {
         JobSeekerDisplayResponse GetJobSeeker(int id);
         Task<JobSeekerDisplayResponse> GetJobSeekerAsync(int id);
+        JobSeekerDisplayResponse GetJobSeekerByUsername(string username);
+        Task<JobSeekerDisplayResponse> GetJobSeekerByUsernameAsync(string username);
 
         IEnumerable<JobSeekerDisplayResponse> GetJobSeekerDisplayResponses();
         Task<IEnumerable<JobSeekerDisplayResponse>> GetJobSeekerDisplayResponsesAsync();

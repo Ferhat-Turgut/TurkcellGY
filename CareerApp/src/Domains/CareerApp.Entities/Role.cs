@@ -13,5 +13,7 @@ namespace CareerApp.Entities
         public int Id { get; set; }
         [Required]
         public string RoleName { get; set; }
+        public IEnumerable<Company>? Companies { get; set; }
+        public IEnumerable<JobSeeker>? jobSeekers { get; set; }
     }
 }

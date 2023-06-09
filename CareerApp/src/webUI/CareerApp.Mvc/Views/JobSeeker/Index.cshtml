@@ -1,0 +1,70 @@
+﻿
+@using CareerApp.Mvc.Views.JobSeeker;
+@model UserDetailsAndJobPostings
+
+@{
+    Layout = "_Layout";
+}
+
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-3">
+            <!-- Kullanıcı Bilgileri -->
+            <h4>İş Arayan Bilgileri</h4>
+            <p>Adı: @Model.JobSeekerDisplayResponse.Name</p>
+            <p>Soyadı: @Model.JobSeekerDisplayResponse.Surname</p>
+            <p>Kullanıcı Adı: @Model.JobSeekerDisplayResponse.Username</p>
+            <p>Meslek: @Model.JobSeekerDisplayResponse.Job</p>
+            <p>Yaş: @Model.JobSeekerDisplayResponse.Age</p>
+            <p>Şehir: @Model.JobSeekerDisplayResponse.City</p>
+            <p>E-posta: @Model.JobSeekerDisplayResponse.Email</p>
+            <p>Telefon No: @Model.JobSeekerDisplayResponse.PhoneNumber</p>
+            <a href="@Url.Action("UpdateUserInfo", "JobSeeker", new { userId = Model.JobSeekerDisplayResponse.Id })" class="btn btn-success">Bilgileri Düzenle</a>
+        </div>
+
+        <div class="col-md-9">
+            <h2>İş İlanları</h2>
+
+            <div class="row">
+                @foreach (var jobPosting in Model.jobPostingDisplayResponses)
+                {
+                    <div class="col-md-4" style="border: 1px solid black;">
+                        <div class="job-listing">
+                            <h4>@jobPosting.Tittle</h4>
+                            <p>Açıklama: @jobPosting.Description</p>
+                            <p>Şartlar: @jobPosting.Terms</p>
+                            <p>İlan Tarihi: @jobPosting.ListingDate</p>
+                            @if (jobPosting.Status == true)
+                            {
+                                <p>İlan Durumu: Aktif</p>
+                            }
+                            else
+                            {
+                                <p>İlan Durumu: Pasif</p>
+                            }
+                        </div>
+                        <a href="@Url.Action("JobPostingDetails", "JobSeeker", new { jobPostingId = jobPosting.Id })" class="btn btn-success">İncele</a>
+                    </div>
+                }
+            </div>
+
+            <!-- Sayfalama işlemleri -->
+            @{
+                int pageCount = (int)Math.Ceiling((double)Model.jobPostingDisplayResponses.Count() / 9);
+            }
+
+            <!-- ... -->
+
+            <nav aria-label="Page navigation">
+                <ul class="pagination">
+                    @for (int i = 1; i <= pageCount; i++)
+                    {
+                        <li class="page-item"><a class="page-link" href="?page=@i">@i</a></li>
+                    }
+                </ul>
+            </nav>
+        </div>
+    </div>
+</div>
+

@@ -36,6 +36,21 @@ namespace CareerApp.Mvc.Controllers
             jobAndCityList.Cities = cityService.GetAllCities();
             return View(jobAndCityList);
         }
+        [HttpPost]
+        public IActionResult JobSeekerLogin(string username,string password)
+        {
+            var IsExist= jobSeekerService.IsJobSeekerExist(username, password);
+            if (!IsExist)
+            {
+                return RedirectToAction("JobSeekerLoginOrRegister");
+            }
+            else
+            {
+                HttpContext.Session.SetString("Username", username);
+                return RedirectToAction("Index", "JobSeeker");
+            }
+            
+        }
         public IActionResult CompanyLoginOrRegister()
         {
             JobAndCityList jobAndCityList = new JobAndCityList();

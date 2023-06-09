@@ -56,6 +56,18 @@ namespace CareerApp.Services
             return _mapper.Map<JobSeekerDisplayResponse>(jobSeeker);
         }
 
+        public JobSeekerDisplayResponse GetJobSeekerByUsername(string username)
+        {
+            var jobSeeker = _repository.GetJobSeekerByUsername(username);
+            return _mapper.Map<JobSeekerDisplayResponse>(jobSeeker);
+        }
+
+        public async Task<JobSeekerDisplayResponse> GetJobSeekerByUsernameAsync(string username)
+        {
+            var jobSeeker =await _repository.GetJobSeekerByUsernameAsync(username);
+            return _mapper.Map<JobSeekerDisplayResponse>(jobSeeker);
+        }
+
         public IEnumerable<JobSeekerDisplayResponse> GetJobSeekerDisplayResponses()
         {
             var jobSeekers = _repository.GetAll();

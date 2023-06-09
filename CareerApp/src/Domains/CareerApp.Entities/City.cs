@@ -12,5 +12,6 @@ namespace CareerApp.Entities
         [Key]
         public int Id { get; set; }
         public string Name { get; set; }
+        public IEnumerable<JobPosting>? jobPostings { get; set; }
     }
 }

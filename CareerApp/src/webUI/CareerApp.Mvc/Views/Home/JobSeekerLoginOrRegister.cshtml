@@ -8,7 +8,7 @@
 </head>
 <body>
     <h2>İş Arayan Girişi</h2>
-    <form action="/Login/CompanyLogin" method="POST">
+    <form action="/Home/JobSeekerLogin" method="POST">
         <div class="form-group">
             <input type="text" class="form-control" id="username" name="username" required placeholder="Kullanıcı Adı">
         </div>
@@ -17,7 +17,10 @@
         </div>
         <button type="submit" class="btn btn-primary">Giriş Yap</button>
     </form>
-
+    @if (ViewBag.LoginErrorMessage != null)
+    {
+        <div class="alert alert-danger">@ViewBag.ErrorMessage</div>
+    }
     <h2>Yeni İş Arayan Kaydı</h2>
     <form action="/Register/NewCompany" method="POST">
         <div class="form-group">
