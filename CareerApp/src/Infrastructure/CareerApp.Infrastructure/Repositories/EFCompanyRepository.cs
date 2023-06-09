@@ -84,6 +84,44 @@ namespace CareerApp.Infrastructure.Repositories
             return await careerAppDbContext.Companies.Where(c => c.Name.Contains(companyName)).ToListAsync();
         }
 
-   
+        public int IsCompanyExist(string companyUsername, string password)
+        {
+            var company =  careerAppDbContext.Companies.SingleOrDefault(c => c.Username == companyUsername && c.Password == password);
+            if (company != null)
+            {
+                return company.Id;
+            }
+            else
+            {
+                //Bulunamayan her kayıt için 0 id sini geri yollayıp kontrol edeceğiz.
+                return 0;
+            }
+        }
+
+        public async Task<int> IsCompanyExistAsync(string companyUsername, string password)
+        {
+            var company = await careerAppDbContext.Companies.SingleOrDefaultAsync(c => c.Username == companyUsername && c.Password == password);
+            if (company != null)
+            {
+                return company.Id;
+            }
+            else
+            {
+                //Bulunamayan her kayıt için 0 id sini geri yollayıp kontrol edeceğiz.
+                return 0;
+            }
+        }
+
+        public Company GetCompanyByUsername(string username)
+        {
+            var company = careerAppDbContext.Companies.SingleOrDefault(c=>c.Username==username);
+            return company;
+        }
+
+        public async Task<Company> GetCompanyByUsernameAsync(string username)
+        {
+            var company =await careerAppDbContext.Companies.SingleOrDefaultAsync(c => c.Username == username);
+            return company;
+        }
     }
 }

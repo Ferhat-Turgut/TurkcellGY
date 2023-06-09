@@ -26,6 +26,8 @@ namespace CareerApp.Services
 
         IEnumerable<RecourseDisplayResponse> GetRecoursesByJobSeeker(int jobSeekerId);
         Task<IEnumerable<RecourseDisplayResponse>> GetRecoursesByJobSeekerAsync(int jobSeekerId);
+        void DeleteRecourse(int recourseId);
+        Task DeleteRecourseAsync(int recourseId);
 
     }
 }

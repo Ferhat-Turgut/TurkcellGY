@@ -1,13 +1,15 @@
-﻿using CareerApp.Mvc.Models;
+﻿using CareerApp.DataTransferObject.Requests;
+using CareerApp.Mvc.Models;
 using CareerApp.Mvc.Views.Home;
 using CareerApp.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
+using System.Net;
 
 namespace CareerApp.Mvc.Controllers
 {
-    
+   
     public class HomeController : Controller
     {
         private readonly ICompanyService companyService;
@@ -22,7 +24,7 @@ namespace CareerApp.Mvc.Controllers
             this.jobService = jobService;
             this.cityService = cityService;
         }
-
+        
         public IActionResult Index()
         {
            
@@ -51,12 +53,46 @@ namespace CareerApp.Mvc.Controllers
             }
             
         }
-        public IActionResult CompanyLoginOrRegister()
+        public async Task<IActionResult> CompanyLoginOrRegister()
         {
             JobAndCityList jobAndCityList = new JobAndCityList();
-            jobAndCityList.Jobs = jobService.GetAllJobs();
-            jobAndCityList.Cities = cityService.GetAllCities();
+            jobAndCityList.Jobs =await jobService.GetAllJobsAsync();
+            jobAndCityList.Cities =await cityService.GetAllCitiesAsync();
             return View(jobAndCityList);
+        }
+        [HttpPost]
+        public async Task< IActionResult> CompanyLogin(string username, string password)
+        {
+            var IsExist =await companyService.IsCompanyExistAsync(username, password);
+            if (!IsExist)
+            {
+                return RedirectToAction("CompanyLoginOrRegister");
+            }
+            else
+            {
+                HttpContext.Session.SetString("CompanyUsername", username);
+                return RedirectToAction("Index", "Company");
+            }
+
+        }
+        [HttpPost]
+        public async Task<IActionResult> CreateNewJobSeekerAsync(CreateNewJobSeekerRequest createNewJobSeekerRequest)
+        {
+            var username=await jobSeekerService.GetJobSeekerByUsernameAsync(createNewJobSeekerRequest.Username);
+
+            if (username==null)
+            {
+                createNewJobSeekerRequest.RoleId = 2;
+                await jobSeekerService.CreateJobSeekerAsync(createNewJobSeekerRequest);
+                TempData["SuccessMessage"] = "Kayıt başarıyla tamamlandı.Lütfen giriş yapın.";
+                return RedirectToAction("JobSeekerLoginOrRegister");
+            }
+            else
+            {
+                TempData["ErrorMessage"] = "Kullanıcı adı başka bir kullanıcı tarafından kullanılıyor.Lütfen değiştirin!";
+                return RedirectToAction("JobSeekerLoginOrRegister");
+            }
+            
         }
 
         public IActionResult Privacy()

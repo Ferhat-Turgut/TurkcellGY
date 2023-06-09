@@ -5,6 +5,8 @@ using CareerApp.Mvc.Controllers;
 using CareerApp.Services;
 using CareerApp.Services.Mappings;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc.Authorization;
 using Microsoft.Extensions.DependencyInjection;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -12,6 +14,16 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
+builder.Services.AddAutoMapper(typeof(MapProfile));
+builder.Services.AddSession();
+
+
+
+builder.Services.AddSession(options =>
+{
+    options.Cookie.Name = "Username";
+    options.IdleTimeout = TimeSpan.FromMinutes(30);
+});
 
 builder.Services.AddDbContext<CareerAppDbContext>();
 
@@ -29,17 +41,10 @@ builder.Services.AddScoped<IRecourseServices, RecourseService>();
 builder.Services.AddScoped<ICityService, CityService>();
 builder.Services.AddScoped<IJobService, JobService>();
 
-builder.Services.AddAutoMapper(typeof(MapProfile));
-
-builder.Services.AddSession();
 
 
 
-builder.Services.AddSession(options =>
-{
-    options.Cookie.Name = "Username";
-    options.IdleTimeout = TimeSpan.FromMinutes(30);
-});
+
 
 
 var app = builder.Build();
@@ -58,7 +63,8 @@ app.UseSession();
 
 app.UseRouting();
 
-app.UseAuthorization();
+app.UseAuthentication();
+app.UseAuthorization(); ;
 
 app.MapControllerRoute(
     name: "default",

@@ -11,5 +11,9 @@ namespace CareerApp.Infrastructure.Repositories
     {
         public IEnumerable<Company> GetCompaniesByName(string companyName);
         public Task<IEnumerable<Company>> GetCompaniesByNameAsync(string companyName);
+        public int IsCompanyExist(string companyUsername, string password);
+        public Task<int> IsCompanyExistAsync(string companyUsername, string password);
+        Company GetCompanyByUsername(string username);
+        Task<Company> GetCompanyByUsernameAsync(string username);
     }
 }

@@ -29,6 +29,16 @@ namespace CareerApp.Services
             await _repository.CreateAsync(recourse);
         }
 
+        public void DeleteRecourse(int recourseId)
+        {
+            _repository.Delete(recourseId);
+        }
+
+        public async Task DeleteRecourseAsync(int recourseId)
+        {
+            await _repository.DeleteAsync(recourseId);
+        }
+
         public RecourseDisplayResponse GetRecourse(int id)
         {
             throw new NotImplementedException();

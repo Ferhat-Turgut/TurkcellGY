@@ -1,0 +1,51 @@
+﻿@model IEnumerable<CareerApp.DataTransferObject.Responses.RecourseDisplayResponse>
+
+@{
+    ViewData["Title"] = "Başvurular";
+}
+
+<h1>Başvurular</h1>
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Id)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.RecourseDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.JobPosting)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Company)
+            </th>
+          
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.RecourseDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.JobPosting.Tittle)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Company.Name)
+            </td>
+            <td>
+                    <a href="@Url.Action("DeleteRecourse", "JobSeeker", new { recourseId = item.Id })" class="btn btn-primary">Başvuruyu Sil</a>
+
+                   @* <a asp-action="DeleteRecourse" asp-route-id="@item.Id">Başvuruyu Sil</a>*@
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

@@ -1,34 +1,22 @@
-﻿@model CareerApp.DataTransferObject.Requests.UpdateJobSeekerRequest
+﻿@model CareerApp.DataTransferObject.Requests.UpdateCompanyRequest
 
 @{
-    ViewData["Title"] = "Kullanıcı Bilgileri Güncelleme";
+    ViewData["Title"] = "UpdateCompanyAsync";
 }
 
-<h1>Kullanıcı Bilgileri Güncelleme</h1>
+<h1>UpdateCompanyAsync</h1>
 
-<h4>İş Arayan</h4>
-@if (ViewBag.HasError != null && ViewBag.HasError)
-{
-    <div class="alert alert-danger" role="alert">
-        @ViewBag.ErrorMessage
-    </div>
-}
-
+<h4>Company</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="UpdateUserInfo" method="post">
+        <form asp-action="UpdateCompanyAsync">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="Id" />
             <div class="form-group">
                 <label asp-for="Name" class="control-label"></label>
                 <input asp-for="Name" class="form-control" />
                 <span asp-validation-for="Name" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Surname" class="control-label"></label>
-                <input asp-for="Surname" class="form-control" />
-                <span asp-validation-for="Surname" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Username" class="control-label"></label>
@@ -41,11 +29,6 @@
                 <span asp-validation-for="Password" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Age" class="control-label"></label>
-                <input asp-for="Age" class="form-control" />
-                <span asp-validation-for="Age" class="text-danger"></span>
-            </div>
-            <div class="form-group">
                 <label asp-for="Email" class="control-label"></label>
                 <input asp-for="Email" class="form-control" />
                 <span asp-validation-for="Email" class="text-danger"></span>
@@ -55,26 +38,25 @@
                 <input asp-for="PhoneNumber" class="form-control" />
                 <span asp-validation-for="PhoneNumber" class="text-danger"></span>
             </div>
-
             <div class="form-group">
-                <label asp-for="CityId" class="control-label"></label>
-                <select asp-for="CityId"  class="form-control" asp-items="@(new SelectList(ViewBag.Cities,"Id", "Name"))"></select>
-                <span asp-validation-for="CityId" class="text-danger"></span>
+                <label asp-for="Biography" class="control-label"></label>
+                <input asp-for="Biography" class="form-control" />
+                <span asp-validation-for="Biography" class="text-danger"></span>
             </div>
-          
             <div class="form-group">
-                <label asp-for="JobId" class="control-label"></label>
-                <select asp-for="JobId" class="form-control" asp-items="@(new SelectList(ViewBag.Jobs, "Id", "Name"))"></select>
-                <span asp-validation-for="JobId" class="text-danger"></span>
+                <label asp-for="Address" class="control-label"></label>
+                <input asp-for="Address" class="form-control" />
+                <span asp-validation-for="Address" class="text-danger"></span>
             </div>
-
             
             <div class="form-group">
-                <input type="submit" value="Kaydet" class="btn btn-primary" />
+                <input type="submit" value="Save" class="btn btn-primary" />
             </div>
         </form>
     </div>
 </div>
 
-
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
 

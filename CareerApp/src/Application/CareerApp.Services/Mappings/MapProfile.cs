@@ -20,6 +20,8 @@ namespace CareerApp.Services.Mappings
 
             CreateMap<Recourse, RecourseDisplayResponse>();
             CreateMap<CreateNewRecourseRequest, Recourse>();
+            
+
 
             CreateMap<JobSeeker, JobSeekerDisplayResponse>();
             CreateMap<CreateNewJobSeekerRequest, JobSeeker>();

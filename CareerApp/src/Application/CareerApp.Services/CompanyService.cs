@@ -59,6 +59,18 @@ namespace CareerApp.Services
             return _mapper.Map<CompanyDisplayResponse>(company);
         }
 
+        public CompanyDisplayResponse GetCompanyByUsername(string username)
+        {
+            var company = _repository.GetCompanyByUsername(username);
+            return _mapper.Map<CompanyDisplayResponse>(company);
+        }
+
+        public async Task<CompanyDisplayResponse> GetCompanyByUsernameAsync(string username)
+        {
+            var company =await _repository.GetCompanyByUsernameAsync(username);
+            return _mapper.Map<CompanyDisplayResponse>(company);
+        }
+
         public IEnumerable<CompanyDisplayResponse> GetCompanyDisplayResponses()
         {
             var companies = _repository.GetAll();
@@ -83,6 +95,32 @@ namespace CareerApp.Services
         {
             var company =await _repository.GetAsync(id);
             return _mapper.Map<UpdateCompanyRequest>(company);
+        }
+
+        public bool IsCompanyExist(string companyUsername, string password)
+        {
+            var IsExist = _repository.IsCompanyExist(companyUsername, password);
+            if (IsExist != 0)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        public async Task<bool> IsCompanyExistAsync(string companyUsername, string password)
+        {
+            var IsExist =await _repository.IsCompanyExistAsync(companyUsername, password);
+            if (IsExist != 0)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
 
         public void UpdateCompany(UpdateCompanyRequest updateCompanyRequest)

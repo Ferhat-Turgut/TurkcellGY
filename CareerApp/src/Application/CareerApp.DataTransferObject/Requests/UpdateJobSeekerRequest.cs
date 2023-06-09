@@ -27,5 +27,7 @@ namespace CareerApp.DataTransferObject.Requests
 
         public int? CityId { get; set; }
         public int? JobId { get; set; }
+        public int RoleId { get; set; }
+        public Role Role { get; set; }
     }
 }

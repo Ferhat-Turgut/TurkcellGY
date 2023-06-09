@@ -34,6 +34,12 @@ namespace CareerApp.Mvc.Controllers
             var jobSeeker=await jobSeekerService.GetJobSeekerByUsernameAsync(jobSeekerUsername);
             var jobPostings = await jobPostingService.GetJobPostingDisplayResponsesAsync();
 
+            var JobSeekerCity =await cityService.GetCityAsync(jobSeeker.CityId);
+            var JobSeekerJob =await jobService.GetJobAsync(jobSeeker.JobId);
+
+            ViewBag.JobSeekerCity = JobSeekerCity.Name;
+            ViewBag.JobSeekerJob = JobSeekerJob.Name;
+
             UserDetailsAndJobPostings userDetailsAndJobPostings = new UserDetailsAndJobPostings();
             userDetailsAndJobPostings.JobSeekerDisplayResponse = jobSeeker;
             userDetailsAndJobPostings.jobPostingDisplayResponses = jobPostings;
@@ -57,9 +63,10 @@ namespace CareerApp.Mvc.Controllers
         {
             
             CreateNewRecourseRequest createNewRecourseRequest = new CreateNewRecourseRequest();
+
             var jobPosting =await jobPostingService.GetJobPostingAsync(jobPostingId);
             var jobSeekerUsername = HttpContext.Session.GetString("Username");
-            var jobSeeker = jobSeekerService.GetJobSeekerByUsername(jobSeekerUsername);
+            var jobSeeker =await jobSeekerService.GetJobSeekerByUsernameAsync(jobSeekerUsername);
 
             createNewRecourseRequest.RecourseDate = DateTime.Now;
             createNewRecourseRequest.JobPostingId = jobPostingId;
@@ -69,24 +76,39 @@ namespace CareerApp.Mvc.Controllers
             await recourseServices.CreateRecourseAsync(createNewRecourseRequest);
             return RedirectToAction("Index", "JobSeeker");
         }
+
         public async Task<IActionResult> UpdateUserInfo(int userId) 
         {
-            var jobSeeker=await jobSeekerService.GetJobSeekerAsync(userId);
+            var jobSeeker=await jobSeekerService.GetJobSeekerForUpdateAsync(userId);
             ViewBag.Cities =await cityService.GetAllCitiesAsync();
             ViewBag.Jobs =await jobService.GetAllJobsAsync();
+
             return View(jobSeeker);
         }
         [HttpPost]
-        public async Task<IActionResult> UpdateUserInfo(JobSeekerDisplayResponse model)
+        public async Task<IActionResult> UpdateUserInfo(UpdateJobSeekerRequest model)
         {
-                
-                model.Role.RoleName = "jobSeeker";
-                model.Role.Id = 2;
-                var updateRequest=await jobSeekerService.GetJobSeekerForUpdateAsync(model.Id);
-                await jobSeekerService.UpdateJobSeekerAsync(updateRequest);
+                model.RoleId = 2;
+                await jobSeekerService.UpdateJobSeekerAsync(model);
                 return RedirectToAction("Index");
-         
-            
+       
+        }
+        public async Task<IActionResult> Recourses(int jobSeekerId)
+        {
+            var recourses =await recourseServices.GetRecoursesByJobSeekerAsync(jobSeekerId);
+            return View(recourses);
+        }
+      
+        public async Task<IActionResult> DeleteRecourse(int recourseId)
+        {
+            await recourseServices.DeleteRecourseAsync(recourseId);
+            return RedirectToAction("Index");
+        }
+        [HttpPost]
+        public  IActionResult Logout()
+        {
+            HttpContext.Session.Clear();
+            return RedirectToAction("Index", "Home");
         }
     }
 }

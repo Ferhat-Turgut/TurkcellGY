@@ -1,0 +1,48 @@
+﻿@model IEnumerable<CareerApp.DataTransferObject.Responses.RecourseDisplayResponse>
+
+@{
+    ViewData["Title"] = "Başvurular";
+}
+
+<h1>Başvurular</h1>
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.JobPosting.Tittle)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.RecourseDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.JobSeeker.Name)
+            </th>
+           
+            <th>
+                @Html.DisplayNameFor(model => model.JobPosting.Id)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                    @Html.DisplayFor(modelItem => item.JobPosting.Tittle)
+            </td>
+            <td>
+                    @Html.DisplayFor(modelItem => item.RecourseDate)
+            </td>
+            <td>
+                    @Html.DisplayFor(modelItem => item.JobSeeker.Name)
+            </td>
+            <td>
+                    @Html.DisplayFor(modelItem => item.JobPosting.Id)
+            </td>
+      
+        </tr>
+}
+    </tbody>
+</table>

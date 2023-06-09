@@ -1,5 +1,4 @@
-﻿
-@using CareerApp.Mvc.Views.JobSeeker;
+﻿@using CareerApp.Mvc.Views.Company;
 @model UserDetailsAndJobPostings
 
 @{
@@ -8,29 +7,22 @@
 
 
 <div class="container">
-    <div class="row" >
+    <div class="row">
         <div class="col-md-3" style="border:solid 1px red">
             <!-- Kullanıcı Bilgileri -->
-            <h4>İş Arayan Bilgileri</h4>
-            <p>Adı: @Model.JobSeekerDisplayResponse.Name</p>
-            <p>Soyadı: @Model.JobSeekerDisplayResponse.Surname</p>
-            <p>Kullanıcı Adı: @Model.JobSeekerDisplayResponse.Username</p>
-            <p>Meslek: @ViewBag.JobSeekerJob</p>
-            <p>Yaş: @Model.JobSeekerDisplayResponse.Age</p>
-            <p>Şehir: @ViewBag.JobSeekerCity</p>
-            <p>E-posta: @Model.JobSeekerDisplayResponse.Email</p>
-            <p>Telefon No: @Model.JobSeekerDisplayResponse.PhoneNumber</p>
-            <a href="@Url.Action("Recourses", "JobSeeker", new { jobSeekerId = Model.JobSeekerDisplayResponse.Id })" class="btn btn-primary">Başvurularım</a>
-            <a href="@Url.Action("UpdateUserInfo", "JobSeeker", new { userId = Model.JobSeekerDisplayResponse.Id })" class="btn btn-success">Bilgileri Düzenle</a><br />
-            <form method="post" action="/JobSeeker/Logout">
-                <button class="btn btn-danger type="submit">Çıkış Yap</button>
-            </form>
+            <h4>Şirket Bilgileri</h4>
+            <p>Adı: @Model.Company.Name</p>
+            <p>Kullanıcı Adı: @Model.Company.Username</p>
+            <p>E-posta: @Model.Company.Email</p>
+            <p>Telefon No: @Model.Company.PhoneNumber</p>
+            <a href="@Url.Action("UpdateCompanyAsync", "Company")" class="btn btn-success">Bilgileri Düzenle</a><br /><br />
+            <a asp-controller="Company" asp-action="ApplicantsAsync" class="btn btn-success">Başvuranlar</a>
 
-            
         </div>
 
+
         <div class="col-md-9">
-            <h2>İş İlanları</h2>
+            <h2>Verdiğiniz İş İlanları</h2>
 
             <div class="row">
                 @foreach (var jobPosting in Model.jobPostingDisplayResponses)
@@ -50,7 +42,6 @@
                                 <p>İlan Durumu: Pasif</p>
                             }
                         </div>
-                        <a href="@Url.Action("JobPostingDetails", "JobSeeker", new { jobPostingId = jobPosting.Id })" class="btn btn-success">İncele</a>
                     </div>
                 }
             </div>
