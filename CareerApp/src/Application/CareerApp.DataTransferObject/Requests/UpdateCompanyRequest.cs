@@ -22,7 +22,8 @@ namespace CareerApp.DataTransferObject.Requests
         public string? Biography { get; set; }
         public string Address { get; set; }
 
-
+        public int RoleId { get; set; }
+        public Role Role { get; set; }
         public IEnumerable<JobPosting>? JobPostings { get; set; }
         public IEnumerable<Recourse>? Recourses { get; set; }
     }

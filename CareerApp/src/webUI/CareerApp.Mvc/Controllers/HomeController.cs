@@ -9,8 +9,7 @@ using System.Net;
 
 namespace CareerApp.Mvc.Controllers
 {
-
-    [Route("[controller]/[action]")]
+    
     public class HomeController : Controller
     {
         private readonly ICompanyService companyService;
@@ -28,8 +27,6 @@ namespace CareerApp.Mvc.Controllers
         
         public IActionResult Index()
         {
-           
-
             return View();
         }
         public IActionResult JobSeekerLoginOrRegister() 
@@ -54,6 +51,25 @@ namespace CareerApp.Mvc.Controllers
             }
             
         }
+        [HttpPost]
+        public async Task<IActionResult> CreateNewJobSeeker(CreateNewJobSeekerRequest createNewJobSeekerRequest)
+        {
+            var username = await jobSeekerService.GetJobSeekerByUsernameAsync(createNewJobSeekerRequest.Username);
+
+            if (username == null)
+            {
+                createNewJobSeekerRequest.RoleId = 2;
+                await jobSeekerService.CreateJobSeekerAsync(createNewJobSeekerRequest);
+                TempData["SuccessMessage"] = "Kayıt başarıyla tamamlandı.Lütfen giriş yapın.";
+                return RedirectToAction("JobSeekerLoginOrRegister");
+            }
+            else
+            {
+                TempData["ErrorMessage"] = "Kullanıcı adı başka bir kullanıcı tarafından kullanılıyor.Lütfen değiştirin!";
+                return RedirectToAction("JobSeekerLoginOrRegister");
+            }
+
+        }
         public async Task<IActionResult> CompanyLoginOrRegister()
         {
             JobAndCityList jobAndCityList = new JobAndCityList();
@@ -67,6 +83,7 @@ namespace CareerApp.Mvc.Controllers
             var IsExist =await companyService.IsCompanyExistAsync(username, password);
             if (!IsExist)
             {
+                TempData["LoginErrorMessage"] = "Kullanıcı adı veya şifre hatalı!";
                 return RedirectToAction("CompanyLoginOrRegister");
             }
             else
@@ -76,39 +93,21 @@ namespace CareerApp.Mvc.Controllers
             }
 
         }
+       
         [HttpPost]
-        public async Task<IActionResult> CreateNewJobSeekerAsync(CreateNewJobSeekerRequest createNewJobSeekerRequest)
+        public async Task< IActionResult> CreateNewCompany(CreateNewCompanyRequest createNewCompanyRequest)
         {
-            var username=await jobSeekerService.GetJobSeekerByUsernameAsync(createNewJobSeekerRequest.Username);
+            var company =await companyService.GetCompanyByUsernameAsync(createNewCompanyRequest.Username);
 
-            if (username==null)
+            if (company == null)
             {
-                createNewJobSeekerRequest.RoleId = 2;
-                await jobSeekerService.CreateJobSeekerAsync(createNewJobSeekerRequest);
-                TempData["SuccessMessage"] = "Kayıt başarıyla tamamlandı.Lütfen giriş yapın.";
-                return RedirectToAction("JobSeekerLoginOrRegister");
+                createNewCompanyRequest.RoleId = 1;
+                await companyService.CreateCompanyAsync(createNewCompanyRequest);
+                TempData["RegisterSuccessMessage"] = "Kayıt başarıyla tamamlandı.Lütfen giriş yapın.";
             }
             else
             {
-                TempData["ErrorMessage"] = "Kullanıcı adı başka bir kullanıcı tarafından kullanılıyor.Lütfen değiştirin!";
-                return RedirectToAction("JobSeekerLoginOrRegister");
-            }
-            
-        }
-        [HttpPost]
-        public IActionResult CreateNewCompanyAsync(CreateNewCompanyRequest createNewCompanyRequest)
-        {
-            var username = companyService.GetCompanyByUsernameAsync(createNewCompanyRequest.username);
-
-            if (username == null)
-            {
-                createNewCompanyRequest.roleId = 1;
-                companyService.CreateCompanyAsync(createNewCompanyRequest);
-                TempData["SuccessMessage"] = "Kayıt başarıyla tamamlandı.Lütfen giriş yapın.";
-            }
-            else
-            {
-                TempData["ErrorMessage"] = "Kullanıcı adı başka bir kullanıcı tarafından kullanılıyor.Lütfen değiştirin!";
+                TempData["RegisterErrorMessage"] = "Kullanıcı adı başka bir kullanıcı tarafından kullanılıyor.Lütfen değiştirin!";
                 
             }
             return RedirectToAction("CompanyLoginOrRegister");

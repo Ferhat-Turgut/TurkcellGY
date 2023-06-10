@@ -8,6 +8,14 @@
 </head>
 <body>
     <h2>İşveren Girişi</h2>
+
+    @if (TempData["LoginErrorMessage"] != null)
+    {
+        <div class="alert alert-danger">
+            @TempData["LoginErrorMessage"]
+        </div>
+    }
+
     <form action="/Home/CompanyLogin" method="post">
         <div class="form-group">
             <input type="text" class="form-control" id="username" name="username" required placeholder="Kullanıcı Adı">
@@ -19,31 +27,45 @@
     </form>
 
     <h2>Yeni İşveren Kaydı</h2>
-    <form method="post" action="/Home/CreateNewCompanyAsync">
+
+    @if (TempData["RegisterSuccessMessage"] != null)
+    {
+        <div class="alert alert-success">
+            @TempData["RegisterSuccessMessage"]
+        </div>
+    }
+    @if (TempData["RegisterErrorMessage"] != null)
+    {
+        <div class="alert alert-danger">
+            @TempData["RegisterErrorMessage"]
+        </div>
+    }
+
+    <form method="post"  action="/Home/CreateNewCompany">
         <div class="form-group">
-            <input type="text" class="form-control" id="name" name="name" required placeholder="İsim">
+            <input type="text" class="form-control" id="name" name="Name" required placeholder="İsim">
         </div>
         
         <div class="form-group">
-            <input type="text" class="form-control" id="username" name="username" required placeholder="Kullanıcı Adı">
+            <input type="text" class="form-control" id="username" name="Username" required placeholder="Kullanıcı Adı">
         </div>
         <div class="form-group">
-            <input type="password" class="form-control" id="password" name="password" required placeholder="Şifre">
+            <input type="password" class="form-control" id="password" name="Password" required placeholder="Şifre">
         </div>
         
         <div class="form-group">
             <input type="email" class="form-control" id="email" name="email"  placeholder="Email">
         </div>
         <div class="form-group">
-            <input type="tel" class="form-control" id="phone" name="phone"  placeholder="Telefon Numarası">
+            <input type="tel" class="form-control" id="phone" name="PhoneNumber"  placeholder="Telefon Numarası">
         </div>
 
         <div class="form-group">
-            <textarea style="width: 100%; height: 100%;" id="biography" name="biography" placeholder="Biyografinizi ekleyin"></textarea>
+            <textarea style="width: 100%; height: 100%;" id="biography" name="Biography" placeholder="Biyografinizi ekleyin"></textarea>
         </div>
 
         <div class="form-group">
-            <input type="text" class="form-control" id="address" name="address"  placeholder="Adres">
+            <input type="text" class="form-control" id="address" name="Address" placeholder="Adres">
         </div>
 
 

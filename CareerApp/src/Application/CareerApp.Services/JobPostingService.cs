@@ -47,6 +47,20 @@ namespace CareerApp.Services
             await _repository.CreateAsync(jobPosting);
         }
 
+        public IEnumerable<JobPostingDisplayResponse> GetActiveJobPostings()
+        {
+            var jobPostings = _repository.GetAllActiveJobPostings();
+            var responses = jobPostings.ConvertToDisplayResponses(_mapper);
+            return responses;
+        }
+
+        public async Task<IEnumerable<JobPostingDisplayResponse>> GetActiveJobPostingsAsync()
+        {
+            var jobPostings =await _repository.GetAllActiveJobPostingsAsync();
+            var responses = jobPostings.ConvertToDisplayResponses(_mapper);
+            return responses;
+        }
+
         public JobPostingDisplayResponse GetJobPosting(int id)
         {
             var jobPosting = _repository.Get(id);
@@ -98,6 +112,11 @@ namespace CareerApp.Services
             var jobPostings =await _repository.GetJobPostingsByCompanyAsync(companyId);
             var responses = jobPostings.ConvertToDisplayResponses(_mapper);
             return responses;
+        }
+
+        public Task<IEnumerable<JobPostingDisplayResponse>> GetJobPostingsByCompanyAsync()
+        {
+            throw new NotImplementedException();
         }
 
         public IEnumerable<JobPostingDisplayResponse> GetJobPostingsByJob(int jobId)

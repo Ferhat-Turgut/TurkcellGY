@@ -11,13 +11,16 @@
         <div class="col-md-3" style="border:solid 1px red">
             <!-- Kullanıcı Bilgileri -->
             <h4>Şirket Bilgileri</h4>
-            <p>Adı: @Model.Company.Name</p>
+            <p>Adı: @Model.Company.Name.ToUpper()</p>
             <p>Kullanıcı Adı: @Model.Company.Username</p>
             <p>E-posta: @Model.Company.Email</p>
             <p>Telefon No: @Model.Company.PhoneNumber</p>
-            <a href="@Url.Action("UpdateCompanyAsync", "Company")" class="btn btn-success">Bilgileri Düzenle</a><br /><br />
-            <a asp-controller="Company" asp-action="ApplicantsAsync" class="btn btn-success">Başvuranlar</a>
-
+            <a href="@Url.Action("UpdateCompany", "Company",new { companyId = Model.Company.Id })" class="btn btn-success">Bilgileri Düzenle</a><br /><br />
+            <a href="@Url.Action("Applicants", "Company",new { companyId = Model.Company.Id })" class="btn btn-success">Başvurular</a><br /><br />
+            <a href="@Url.Action("CreateNewJobPosting", "Company",new { companyId = Model.Company.Id })" class="btn btn-success">Yeni İlan Oluştur</a><br /><br />
+            <form method="post" action="/Company/Logout">
+                <button class="btn btn-danger type="submit">Çıkış Yap</button>
+            </form>
         </div>
 
 
@@ -33,6 +36,7 @@
                             <p>Açıklama: @jobPosting.Description</p>
                             <p>Şartlar: @jobPosting.Terms</p>
                             <p>İlan Tarihi: @jobPosting.ListingDate</p>
+                            <p>İlan No: @jobPosting.Id</p>
                             @if (jobPosting.Status == true)
                             {
                                 <p>İlan Durumu: Aktif</p>
@@ -42,7 +46,16 @@
                                 <p>İlan Durumu: Pasif</p>
                             }
                         </div>
+                        <div>
+                            <a href="@Url.Action("ChangeJobPostingStatus", "Company",new { jobPostingId = jobPosting.Id })" class="btn btn-danger">İlan yayın durumunu Değiştir</a>
+
+                        </div>
                     </div>
+
+                    <br />
+
+                    <br />
+
                 }
             </div>
 

@@ -78,7 +78,7 @@ namespace CareerApp.Infrastructure.Repositories
 
         public IEnumerable<Recourse> GetRecoursesByCompany(int companyId)
         {
-            return careerAppDbContext.Recourses.AsNoTracking().Where(r => r.CompanyId == companyId).ToList();
+            return careerAppDbContext.Recourses.AsNoTracking().Where(r => r.CompanyId == companyId);
         }
 
         public async Task<IEnumerable<Recourse>> GetRecoursesByCompanyAsync(int companyId)

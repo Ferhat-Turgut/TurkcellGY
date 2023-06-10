@@ -1,0 +1,94 @@
+﻿@model CareerApp.Mvc.Views.Company.ApplicantsDetails
+
+@{
+    ViewData["Title"] = "Başvuru Detayları";
+}
+
+<h1>Başvuru Detayları</h1>
+
+<div>
+    <h4>İş İlanı</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            İlan Başlık:
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.JobPosting.Tittle)
+        </dd>
+        <dt class = "col-sm-2">
+            Açıklama:
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.JobPosting.Description)
+        </dd>
+        <dt class = "col-sm-2">
+            Şartlar:
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.JobPosting.Terms)
+        </dd>
+        <dt class = "col-sm-2">
+            İlan Durumu:
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.JobPosting.Status)
+        </dd>
+        <dt class = "col-sm-2">
+            İlan Tarihi:
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.JobPosting.ListingDate)
+        </dd>
+        
+    </dl>
+</div>
+<div>
+    <h4>Başvuran Detayları</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            Adı:
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.JobSeeker.Name)
+        </dd>
+        <dt class="col-sm-2">
+            Soyadı:
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.JobSeeker.Surname)
+        </dd>
+        <dt class="col-sm-2">
+            Meslek:
+        </dt>
+        <dd class="col-sm-10">
+            @ViewBag.JobSeekerJob
+        </dd>
+        <dt class="col-sm-2">
+            Yaş:
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.JobSeeker.Age)
+        </dd>
+        <dt class="col-sm-2">
+            Şehir:
+        </dt>
+        <dd class="col-sm-10">
+             @ViewBag.JobSeekerCity
+        </dd>
+        <dt class="col-sm-2">
+            Email:
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.JobSeeker.Email)
+        </dd>
+        <dt class="col-sm-2">
+            Telefon:
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.JobSeeker.PhoneNumber)
+        </dd>
+
+    </dl>
+</div>

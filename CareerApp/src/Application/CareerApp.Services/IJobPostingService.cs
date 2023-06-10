@@ -28,6 +28,8 @@ namespace CareerApp.Services
         Task<IEnumerable<JobPostingDisplayResponse>> GetJobPostingsByJobAsync(int jobId);
         IEnumerable<JobPostingDisplayResponse> GetJobPostingsByCompany(int companyId);
         Task<IEnumerable<JobPostingDisplayResponse>> GetJobPostingsByCompanyAsync(int companyId);
+        IEnumerable<JobPostingDisplayResponse> GetActiveJobPostings();
+        Task<IEnumerable<JobPostingDisplayResponse>> GetActiveJobPostingsAsync();
 
         void ChangeJobPostingStatus(int jobPostingId);
         Task ChangeJobPostingStatusAsync(int jobPostingId);

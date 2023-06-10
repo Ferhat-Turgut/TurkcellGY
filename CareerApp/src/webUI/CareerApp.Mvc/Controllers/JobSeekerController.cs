@@ -32,8 +32,8 @@ namespace CareerApp.Mvc.Controllers
             
             var jobSeekerUsername = HttpContext.Session.GetString("Username");
             var jobSeeker=await jobSeekerService.GetJobSeekerByUsernameAsync(jobSeekerUsername);
-            var jobPostings = await jobPostingService.GetJobPostingDisplayResponsesAsync();
-
+            var jobPostings = await jobPostingService.GetActiveJobPostingsAsync();
+            
             var JobSeekerCity =await cityService.GetCityAsync(jobSeeker.CityId);
             var JobSeekerJob =await jobService.GetJobAsync(jobSeeker.JobId);
 
@@ -95,9 +95,9 @@ namespace CareerApp.Mvc.Controllers
         }
         public async Task<IActionResult> Recourses(int jobSeekerId)
         {
-           
+       
             var recourses =await recourseServices.GetRecoursesByJobSeekerAsync(jobSeekerId);
-           
+
             return View(recourses);
         }
       

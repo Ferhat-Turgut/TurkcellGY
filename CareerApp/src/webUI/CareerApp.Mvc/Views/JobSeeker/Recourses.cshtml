@@ -35,10 +35,10 @@
                 @Html.DisplayFor(modelItem => item.RecourseDate)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.JobPostings.Tittle)
+                @Html.DisplayFor(modelItem => item.JobPostingId)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Company)
+                @Html.DisplayFor(modelItem => item.CompanyId)
             </td>
             <td>
                     <a href="@Url.Action("DeleteRecourse", "JobSeeker", new { recourseId = item.Id })" class="btn btn-primary">Başvuruyu Sil</a>

@@ -12,12 +12,12 @@
         <div class="col-md-3" style="border:solid 1px red">
             <!-- Kullanıcı Bilgileri -->
             <h4>İş Arayan Bilgileri</h4>
-            <p>Adı: @Model.JobSeekerDisplayResponse.Name</p>
-            <p>Soyadı: @Model.JobSeekerDisplayResponse.Surname</p>
+            <p>Adı: @Model.JobSeekerDisplayResponse.Name.ToUpper()</p>
+            <p>Soyadı: @Model.JobSeekerDisplayResponse.Surname.ToUpper()</p>
             <p>Kullanıcı Adı: @Model.JobSeekerDisplayResponse.Username</p>
-            <p>Meslek: @ViewBag.JobSeekerJob</p>
+            <p>Meslek: @ViewBag.JobSeekerJob.ToUpper()</p>
             <p>Yaş: @Model.JobSeekerDisplayResponse.Age</p>
-            <p>Şehir: @ViewBag.JobSeekerCity</p>
+            <p>Şehir: @ViewBag.JobSeekerCity.ToUpper()</p>
             <p>E-posta: @Model.JobSeekerDisplayResponse.Email</p>
             <p>Telefon No: @Model.JobSeekerDisplayResponse.PhoneNumber</p>
             <a href="@Url.Action("Recourses", "JobSeeker", new { jobSeekerId = Model.JobSeekerDisplayResponse.Id })" class="btn btn-primary">Başvurularım</a>

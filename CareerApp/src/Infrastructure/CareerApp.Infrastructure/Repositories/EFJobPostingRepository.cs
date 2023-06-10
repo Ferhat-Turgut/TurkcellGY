@@ -125,5 +125,18 @@ namespace CareerApp.Infrastructure.Repositories
             careerAppDbContext.JobPostings.Update(jobPosting);
             await careerAppDbContext.SaveChangesAsync();
         }
+
+        public IEnumerable<JobPosting> GetAllActiveJobPostings()
+        {
+            var activeJobPostings = careerAppDbContext.JobPostings.Where(j=>j.Status==true).ToList();
+            return activeJobPostings;
+        }
+
+
+        public async Task<IEnumerable<JobPosting>> GetAllActiveJobPostingsAsync()
+        {
+            var activeJobPostings = careerAppDbContext.JobPostings.Where(j => j.Status == true).ToList();
+            return  activeJobPostings;
+        }
     }
 }

@@ -14,6 +14,7 @@ namespace CareerApp.Infrastructure.Repositories
         JobSeeker GetJobSeekerByUsername(string username);
         Task<JobSeeker> GetJobSeekerByUsernameAsync(string username);
 
+
         public int IsJobSeekerExist(string jobSeekerUsername,string password);
         public Task<int> IsJobSeekerExistAsync(string jobSeekerUsername,string password);
     }

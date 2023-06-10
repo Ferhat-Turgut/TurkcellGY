@@ -123,5 +123,7 @@ namespace CareerApp.Infrastructure.Repositories
             var jobSeeker =await careerAppDbContext.JobSeekers.SingleOrDefaultAsync(j => j.Username == username);
             return jobSeeker;
         }
+
+
     }
 }
