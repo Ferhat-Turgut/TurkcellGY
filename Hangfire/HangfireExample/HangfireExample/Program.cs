@@ -7,11 +7,11 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 
 //HangFire
-var hangfireConnectionString = "Server=(localdb)\\MSSQLLocalDB;Database=DbCronJobHangfire;Integrated Security=True;";
+var hangfireConnectionString = "Server=(localdb)\\MSSQLLocalDB;Database=DbCronJobHangfire1;Integrated Security=True;";
 builder.Services.AddHangfire(x =>
 {
     x.UseSqlServerStorage(hangfireConnectionString);
-    RecurringJob.AddOrUpdate<Job>(j => j.DbControl(), "29 03  * * *");//hergün saat 18:30 da zamanlayýcý.
+    RecurringJob.AddOrUpdate<Job>(j => j.DbControl(), "50 03  * * *");//hergün saat 03:50 da zamanlayýcý.
 });
 
 builder.Services.AddHangfireServer();
