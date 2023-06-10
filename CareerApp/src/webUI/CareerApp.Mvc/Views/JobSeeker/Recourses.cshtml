@@ -17,7 +17,7 @@
                 @Html.DisplayNameFor(model => model.RecourseDate)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.JobPosting)
+                @Html.DisplayNameFor(model => model.JobPostings)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Company)
@@ -35,15 +35,15 @@
                 @Html.DisplayFor(modelItem => item.RecourseDate)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.JobPosting.Tittle)
+                @Html.DisplayFor(modelItem => item.JobPostings.Tittle)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Company.Name)
+                @Html.DisplayFor(modelItem => item.Company)
             </td>
             <td>
                     <a href="@Url.Action("DeleteRecourse", "JobSeeker", new { recourseId = item.Id })" class="btn btn-primary">Başvuruyu Sil</a>
 
-                   @* <a asp-action="DeleteRecourse" asp-route-id="@item.Id">Başvuruyu Sil</a>*@
+                  
             </td>
         </tr>
 }

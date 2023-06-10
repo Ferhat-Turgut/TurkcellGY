@@ -11,17 +11,17 @@ namespace CareerApp.DataTransferObject.Requests
     public class CreateNewCompanyRequest
     {
         [Required, MaxLength(50)]
-        public string Name { get; set; }
+        public string name { get; set; }
         [Required, MaxLength(20)]
-        public string Username { get; set; }
+        public string username { get; set; }
         [Required, MaxLength(20)]
-        public string Password { get; set; }
+        public string password { get; set; }
         public string? Email { get; set; }
         public string? PhoneNumber { get; set; }
         public string? Biography { get; set; }
-        public string Address { get; set; }
+        public string address { get; set; }
 
-        public int RoleId { get; set; }
+        public int? roleId { get; set; }
 
     }
 }

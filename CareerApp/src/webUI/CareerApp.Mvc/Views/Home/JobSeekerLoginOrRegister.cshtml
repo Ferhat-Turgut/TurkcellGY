@@ -36,7 +36,7 @@
     }
 
 
-    <form method="post" action="/Home/CreateNewJobSeeker">
+    <form asp-controller="Home" asp-action="CreateNewJobSeeker" method="post">
         <div class="form-group">
             <input type="text" class="form-control" id="name" name="name" required placeholder="İsim">
         </div>
@@ -47,20 +47,19 @@
             <input type="text" class="form-control" id="username" name="username" required placeholder="Kullanıcı Adı">
         </div>
         <div class="form-group">
-            <input type="password" class="form-control" id="password" name="password" required placeholder="Şifre">
+            <input type="password" class="form-control" id="password" name="Password" required placeholder="Şifre">
         </div>
         <div class="form-group">
-            <input type="text" class="form-control" id="age" name="age"  placeholder="Yaş">
+            <input type="text" class="form-control" id="age" name="Age"  placeholder="Yaş">
         </div>
         <div class="form-group">
-            <input type="email" class="form-control" id="email" name="email"  placeholder="Email">
+            <input type="email" class="form-control" id="email" name="Email"  placeholder="Email">
         </div>
         <div class="form-group">
-            <input type="tel" class="form-control" id="phone" name="phone"  placeholder="Telefon Numarası">
+            <input type="tel" class="form-control" id="phone" name="PhoneNumber" placeholder="Telefon Numarası">
         </div>
         <div class="form-group">
-          
-            <select id="jobs" name="jobs">
+            <select id="jobs" name="JobId">
                 @foreach (var job in Model.Jobs)
                 {
                     <option value="@job.Id">@job.Name</option>
@@ -68,15 +67,14 @@
             </select>
         </div>
         <div class="form-group">
-            <select id="cities" name="cities">
+            <select id="cities" name="CityId">
                 @foreach (var city in Model.Cities)
                 {
                     <option value="@city.Id">@city.Name</option>
                 }
             </select>
         </div>
-   
-
+        
         <button type="submit" class="btn btn-primary">Kayıt Ol</button>
     </form>
 

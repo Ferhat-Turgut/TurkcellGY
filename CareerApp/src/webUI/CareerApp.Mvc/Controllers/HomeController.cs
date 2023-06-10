@@ -9,7 +9,8 @@ using System.Net;
 
 namespace CareerApp.Mvc.Controllers
 {
-   
+
+    [Route("[controller]/[action]")]
     public class HomeController : Controller
     {
         private readonly ICompanyService companyService;
@@ -93,6 +94,24 @@ namespace CareerApp.Mvc.Controllers
                 return RedirectToAction("JobSeekerLoginOrRegister");
             }
             
+        }
+        [HttpPost]
+        public IActionResult CreateNewCompanyAsync(CreateNewCompanyRequest createNewCompanyRequest)
+        {
+            var username = companyService.GetCompanyByUsernameAsync(createNewCompanyRequest.username);
+
+            if (username == null)
+            {
+                createNewCompanyRequest.roleId = 1;
+                companyService.CreateCompanyAsync(createNewCompanyRequest);
+                TempData["SuccessMessage"] = "Kayıt başarıyla tamamlandı.Lütfen giriş yapın.";
+            }
+            else
+            {
+                TempData["ErrorMessage"] = "Kullanıcı adı başka bir kullanıcı tarafından kullanılıyor.Lütfen değiştirin!";
+                
+            }
+            return RedirectToAction("CompanyLoginOrRegister");
         }
 
         public IActionResult Privacy()

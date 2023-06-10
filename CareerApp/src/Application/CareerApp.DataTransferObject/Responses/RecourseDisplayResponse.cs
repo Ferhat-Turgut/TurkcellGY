@@ -16,8 +16,8 @@ namespace CareerApp.DataTransferObject.Responses
         public int CompanyId { get; set; }
         public Company Company { get; set; }
         public int JobPostingId { get; set; }
-        public JobPosting JobPosting { get; set; }
-        public int? JobSeekerId { get; set; }
-        public JobSeeker? JobSeeker { get; set; }
+        public JobPosting JobPostings { get; set; }
+        public int JobSeekerId { get; set; }
+        public JobSeeker JobSeeker { get; set; }
     }
 }

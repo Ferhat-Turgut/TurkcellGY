@@ -95,7 +95,9 @@ namespace CareerApp.Mvc.Controllers
         }
         public async Task<IActionResult> Recourses(int jobSeekerId)
         {
+           
             var recourses =await recourseServices.GetRecoursesByJobSeekerAsync(jobSeekerId);
+           
             return View(recourses);
         }
       

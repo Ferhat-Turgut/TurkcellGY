@@ -37,13 +37,13 @@ namespace CareerApp.Mvc.Controllers
 
             return View(userDetailsAndJobPostings);
         }
-        //[HttpGet]
-       //public  ActionResult UpdateCompanyAsync( )
-       // {
-            
-       //     return View();
-       // }
-       public async Task<IActionResult> ApplicantsAsync(int companyId)
+        [HttpGet]
+        public ActionResult UpdateCompanyAsync()
+        {
+
+            return View();
+        }
+        public async Task<IActionResult> ApplicantsAsync(int companyId)
         {
             var applicants =await recourseServices.GetRecoursesByCompanyAsync(companyId);
             return View(applicants);

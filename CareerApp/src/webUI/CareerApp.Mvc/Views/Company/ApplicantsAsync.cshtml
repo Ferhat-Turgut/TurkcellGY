@@ -11,7 +11,7 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.JobPosting.Tittle)
+                @Html.DisplayNameFor(model => model.JobPostings.Tittle)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.RecourseDate)
@@ -21,7 +21,7 @@
             </th>
            
             <th>
-                @Html.DisplayNameFor(model => model.JobPosting.Id)
+                @Html.DisplayNameFor(model => model.JobPostings.Id)
             </th>
             <th></th>
         </tr>
@@ -30,7 +30,7 @@
 @foreach (var item in Model) {
         <tr>
             <td>
-                    @Html.DisplayFor(modelItem => item.JobPosting.Tittle)
+                    @Html.DisplayFor(modelItem => item.JobPostings.Tittle)
             </td>
             <td>
                     @Html.DisplayFor(modelItem => item.RecourseDate)
@@ -39,7 +39,7 @@
                     @Html.DisplayFor(modelItem => item.JobSeeker.Name)
             </td>
             <td>
-                    @Html.DisplayFor(modelItem => item.JobPosting.Id)
+                    @Html.DisplayFor(modelItem => item.JobPostings.Id)
             </td>
       
         </tr>
