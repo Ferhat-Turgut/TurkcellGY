@@ -1,6 +1,9 @@
-﻿using CourseApp.Mvc.Models;
+﻿using CourseApp.DataTransferObjects.Responses;
+using CourseApp.Mvc.CacheTools;
+using CourseApp.Mvc.Models;
 using CourseApp.Services;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Caching.Memory;
 using System.Diagnostics;
 
 namespace CourseApp.Mvc.Controllers
@@ -9,23 +12,21 @@ namespace CourseApp.Mvc.Controllers
     {
         private readonly ILogger<HomeController> _logger;
         private readonly ICourseService _courseService;
-
-        public HomeController(ILogger<HomeController> logger,ICourseService courseService)
+        private readonly IMemoryCache _memoryCache;
+        public HomeController(ILogger<HomeController> logger,ICourseService courseService,IMemoryCache memoryCache)
         {
             _logger = logger;
             _courseService = courseService;
+            _memoryCache = memoryCache;
         }
 
         public IActionResult Index(int pageNo=1,int? categoryId=null)
         {
-            //Eğer categoryId yoksa varsayılan olarak null alınır ve tüm liste courses'a atılır..
-            //Eğer categoryId varsa categoryId ye göre ilgili liste courses'a atılır. 
-            var courses = categoryId == null? _courseService.GetCourseDisplayResponses():
-                                              _courseService.GetCourseByCategory(categoryId.Value);
+            IEnumerable<CourseDisplayResponse> courses = GetCoursesMemCacheOrDb(categoryId);
 
-            var courseCount= courses.Count();
+            var courseCount = courses.Count();
             var coursePerPage = 4;
-            var totalPage = Math.Ceiling((decimal)courseCount/coursePerPage);
+            var totalPage = Math.Ceiling((decimal)courseCount / coursePerPage);
             //ViewBag.TotalPage = totalPage;
             //ViewBag.activePge = pageNo;
 
@@ -50,8 +51,32 @@ namespace CourseApp.Mvc.Controllers
             return View(model);
         }
 
-        public IActionResult Privacy()
+        private IEnumerable<CourseDisplayResponse> GetCoursesMemCacheOrDb(int? categoryId)
         {
+            //eğer cache de varsa cache den kullanır, yoksa kaynaktan çekip cache e atar.
+
+            if (!_memoryCache.TryGetValue("allCourses",out CacheDataInfo cacheDataInfo))
+            {
+                var options = new MemoryCacheEntryOptions()
+                                  .SetSlidingExpiration(TimeSpan.FromMinutes(1))
+                                  .SetPriority(CacheItemPriority.Normal);
+                cacheDataInfo = new CacheDataInfo
+                {
+                    CacheTime = DateTime.Now,
+                    Courses = _courseService.GetCourseDisplayResponses() 
+                };;
+                _memoryCache.Set("allCourses", cacheDataInfo, options);
+            }
+
+            _logger.LogInformation($"{cacheDataInfo.CacheTime.ToLongTimeString()} anındaki cache'i görüntülüyorsunuz.");
+            return categoryId == null ? cacheDataInfo.Courses :
+                                        _courseService.GetCourseByCategory(categoryId.Value);
+        }
+        [ResponseCache(Duration =70,VaryByQueryKeys =new[] {"id"},Location =ResponseCacheLocation.Client)]
+        public IActionResult Privacy(int id)
+        {
+            ViewBag.Id = id;
+            ViewBag.DateTime = DateTime.Now;
             return View();
         }
 

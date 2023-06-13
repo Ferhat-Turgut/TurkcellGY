@@ -1,5 +1,6 @@
 using CourseApp.Infrastructure.Data;
 using CourseApp.Infrastructure.Repositories;
+using CourseApp.Mvc.Extensions;
 using CourseApp.Services;
 using CourseApp.Services.Mappings;
 using Microsoft.AspNetCore.Authentication.Cookies;
@@ -10,15 +11,6 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
-builder.Services.AddScoped<ICourseService,CourseService>();
-//builder.Services.AddScoped<ICourseRepository,FakeCourseRepository>();
-builder.Services.AddScoped<ICourseRepository,EFCourseRepository>();
-
-builder.Services.AddScoped<ICategoryService,CategoryService>();
-//builder.Services.AddScoped<ICategoryRepository,FakeCategoryRepository>();
-builder.Services.AddScoped<ICategoryRepository,EFCategoryRepository>();
-
-builder.Services.AddScoped<IUserService,UserService>();
 
 //Inversion Od Control (IoC)
 builder.Services.AddAutoMapper(typeof(MapProfile));
@@ -29,7 +21,7 @@ builder.Services.AddSession(opt =>
 });
 
 var connectionString = builder.Configuration.GetConnectionString("db");
-builder.Services.AddDbContext<CourseDbContext>(opt=>opt.UseSqlServer(connectionString));
+builder.Services.AddInjections(connectionString);//extension yazdýk.(IoC Extensions)
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie(opt =>
@@ -37,6 +29,13 @@ builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationSc
     opt.LoginPath = "/Users/Login";
     opt.AccessDeniedPath = "/Users/AccessDenied";
     opt.ReturnUrlParameter = "gidilecekSayfa";
+});
+
+//Caching
+builder.Services.AddMemoryCache();//Eðer istenen bilgi cashe te varsa alýr, yoksa normalde veriye ulaþýlan yol ile alýnýr.Süresi belirlenebilir.
+builder.Services.AddResponseCaching(opt=>
+{
+opt.SizeLimit = 100000;
 });
 
 var app = builder.Build();
@@ -56,6 +55,7 @@ context.Database.EnsureCreated();
 DbSeeding.SeedDatabase(context);
 
 app.UseHttpsRedirection();
+app.UseResponseCaching();
 app.UseStaticFiles();
 
 app.UseSession();
