@@ -68,6 +68,11 @@ namespace CourseApp.Infrastructure.Repositories
             return courseDbContext.courses.AsNoTracking().Where(c=>c.Name.Contains(name)).AsEnumerable();
         }
 
+        public async Task<bool> IsExistAsync(int id)
+        {
+            return await courseDbContext.courses.AnyAsync(c=>c.Id==id);
+        }
+
         public async Task UpdateAsync(Course entity)
         {
             courseDbContext.courses.Update(entity);

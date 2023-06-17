@@ -42,6 +42,28 @@ namespace CourseApp.Mvc.Controllers
             ViewBag.Categories = getCategoriesForSelectList();
             return View();
         }
+        [HttpGet]
+        public async Task<IActionResult> Edit(int id)
+        {
+            ViewBag.Categories = getCategoriesForSelectList();
+            var course=await courseService.GetCourseForUpdate(id);
+            return View(course);
+        }
+        [HttpPost]
+        public async Task<IActionResult> Edit(int id,UpdateCourseRequest updateCourseRequest)
+        {
+            if (await courseService.CourseIsExist(id))
+            {
+                if (ModelState.IsValid)
+                {
+                    await courseService.UpdateCourse(updateCourseRequest);
+                    return Redirect(nameof(Index));
+                }
+                ViewBag.Categories = getCategoriesForSelectList();
+                return View();
+            }
+            return NotFound();
+        }
 
         private IEnumerable<SelectListItem> getCategoriesForSelectList()
         {

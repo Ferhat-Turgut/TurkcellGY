@@ -109,6 +109,11 @@ namespace CourseApp.Infrastructure.Repositories
             throw new NotImplementedException();
         }
 
+        public Task<bool> IsExistAsync(int id)
+        {
+            throw new NotImplementedException();
+        }
+
         public Task UpdateAsync(Course entity)
         {
             throw new NotImplementedException();

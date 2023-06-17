@@ -23,6 +23,10 @@ namespace CourseApp.Services
             _mapper = mapper;
         }
 
+        public CourseService()
+        {
+        }
+
         public CourseDisplayResponse GetCourse(int id)
         {
             var course = _repository.Get(id);
@@ -46,6 +50,23 @@ namespace CourseApp.Services
         {
             var course = _mapper.Map<Course>(createNewCourseRequest);
             await _repository.CreateAsync(course);
+        }
+
+        public async Task UpdateCourse(UpdateCourseRequest updateCourseRequest)
+        {
+            var course=_mapper.Map<Course>(updateCourseRequest);
+            await _repository.UpdateAsync(course);
+        }
+
+        public async Task<bool> CourseIsExist(int courseId)
+        {
+            return await _repository.IsExistAsync(courseId);
+        }
+
+        public async Task<UpdateCourseRequest> GetCourseForUpdate(int id)
+        {
+            var course=await _repository.GetAsync(id);
+            return  _mapper.Map<UpdateCourseRequest>(course);
         }
     }
 }

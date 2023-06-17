@@ -1,4 +1,6 @@
 ﻿using CareerApp.Entities;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -8,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace CareerApp.Infrastructure.Data
 {
-    public class CareerAppDbContext:DbContext
+    public class CareerAppDbContext:IdentityDbContext
     {
    
         public DbSet<Role> Roles { get; set; }
@@ -21,6 +23,13 @@ namespace CareerApp.Infrastructure.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            base.OnModelCreating(modelBuilder);
+
+            modelBuilder.Entity<IdentityUserLogin<string>>(entity =>
+            {
+                entity.HasKey(e => new { e.LoginProvider, e.ProviderKey });
+            });
+
             modelBuilder.Entity<Role>().HasData(new Role { Id = 1, RoleName = "company" },
                                                 new Role { Id = 2, RoleName = "jobSeeker" },
                                                 new Role { Id = 3, RoleName = "admin" });
