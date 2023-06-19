@@ -25,6 +25,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastru
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CourseApp.Infrastructure", "src\Infrastructure\CourseApp.Infrastructure\CourseApp.Infrastructure.csproj", "{E4FF3D42-46E9-4327-83B9-B383C2DF9238}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "WebAPI", "WebAPI", "{56B7024E-95BC-4646-964A-9047AB394859}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CourseApp.API", "src\WebAPI\CourseApp.API\CourseApp.API.csproj", "{F9B88FA2-CF1F-4F0D-9950-C91EB50C47AF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -51,6 +55,10 @@ Global
 		{E4FF3D42-46E9-4327-83B9-B383C2DF9238}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E4FF3D42-46E9-4327-83B9-B383C2DF9238}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E4FF3D42-46E9-4327-83B9-B383C2DF9238}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F9B88FA2-CF1F-4F0D-9950-C91EB50C47AF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F9B88FA2-CF1F-4F0D-9950-C91EB50C47AF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F9B88FA2-CF1F-4F0D-9950-C91EB50C47AF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F9B88FA2-CF1F-4F0D-9950-C91EB50C47AF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -66,6 +74,8 @@ Global
 		{95AA8D26-A306-45B0-9555-488FF942D054} = {A0850DBE-3726-45B8-8C04-1BFD0116A4BC}
 		{1C22A4E0-C446-44D9-8499-05F1C03DAA16} = {5AFA5B6C-F970-40F7-AA7B-5F799AE8F858}
 		{E4FF3D42-46E9-4327-83B9-B383C2DF9238} = {1C22A4E0-C446-44D9-8499-05F1C03DAA16}
+		{56B7024E-95BC-4646-964A-9047AB394859} = {5AFA5B6C-F970-40F7-AA7B-5F799AE8F858}
+		{F9B88FA2-CF1F-4F0D-9950-C91EB50C47AF} = {56B7024E-95BC-4646-964A-9047AB394859}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {88AD13A6-7C6B-4FF7-9A95-8584E33AFE24}

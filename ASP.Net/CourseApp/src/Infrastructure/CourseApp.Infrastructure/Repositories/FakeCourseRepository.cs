@@ -104,6 +104,11 @@ namespace CourseApp.Infrastructure.Repositories
             return _courses.Where(c => c.CategoryId == categoryId).AsEnumerable();
         }
 
+        public Task<IEnumerable<Course>> GetCoursesByCategoryAsync(int categoryId)
+        {
+            throw new NotImplementedException();
+        }
+
         public IEnumerable<Course> GetCoursesByName(string name)
         {
             throw new NotImplementedException();

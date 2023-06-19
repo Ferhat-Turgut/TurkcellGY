@@ -63,6 +63,11 @@ namespace CourseApp.Infrastructure.Repositories
             return courseDbContext.courses.AsNoTracking().Where(c=>c.CategoryId==categoryId).ToList().AsEnumerable();
         }
 
+        public async Task<IEnumerable<Course>> GetCoursesByCategoryAsync(int categoryId)
+        {
+            return await courseDbContext.courses.AsNoTracking().Where(c => c.CategoryId == categoryId).ToListAsync();
+        }
+
         public IEnumerable<Course> GetCoursesByName(string name)
         {
             return courseDbContext.courses.AsNoTracking().Where(c=>c.Name.Contains(name)).AsEnumerable();
