@@ -11,7 +11,7 @@ namespace CourseApp.Infrastructure.Repositories
     public interface ICourseRepository:IRepository<Course>
     {
         public IEnumerable<Course> GetCoursesByCategory(int categoryId);
-        public IEnumerable<Course> GetCoursesByName(string name);
+        public Task<IEnumerable<Course>> GetCoursesByNameAsync(string name);
         public Task<IEnumerable<Course>> GetCoursesByCategoryAsync(int categoryId);
     }
 }

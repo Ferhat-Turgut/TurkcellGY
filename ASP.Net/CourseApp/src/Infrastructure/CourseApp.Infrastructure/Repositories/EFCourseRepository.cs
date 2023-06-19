@@ -68,9 +68,11 @@ namespace CourseApp.Infrastructure.Repositories
             return await courseDbContext.courses.AsNoTracking().Where(c => c.CategoryId == categoryId).ToListAsync();
         }
 
-        public IEnumerable<Course> GetCoursesByName(string name)
+      
+
+        public async Task<IEnumerable<Course>> GetCoursesByNameAsync(string name)
         {
-            return courseDbContext.courses.AsNoTracking().Where(c=>c.Name.Contains(name)).AsEnumerable();
+            return await courseDbContext.courses.AsNoTracking().Where(c => c.Name.Contains(name)).ToListAsync();
         }
 
         public async Task<bool> IsExistAsync(int id)

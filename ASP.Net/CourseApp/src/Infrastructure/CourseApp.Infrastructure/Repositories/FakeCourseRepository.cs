@@ -114,6 +114,11 @@ namespace CourseApp.Infrastructure.Repositories
             throw new NotImplementedException();
         }
 
+        public Task<IEnumerable<Course>> GetCoursesByNameAsync(string name)
+        {
+            throw new NotImplementedException();
+        }
+
         public Task<bool> IsExistAsync(int id)
         {
             throw new NotImplementedException();
