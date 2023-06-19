@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using CourseApp.Services;
 using CourseApp.DataTransferObjects.Requests;
+using CourseApp.API.Filters;
 
 namespace CourseApp.API.Controllers
 {
@@ -61,11 +62,9 @@ namespace CourseApp.API.Controllers
             return BadRequest(ModelState);
         }
         [HttpPut("{id}")]
+        [IsExists]
         public async Task<IActionResult> Update(int id, UpdateCourseRequest updateCourseRequest)
         {
-            var isExists = await courseService.CourseIsExist(id);
-            if (isExists)
-            {
                 if (ModelState.IsValid)
                 {
                     await courseService.UpdateCourse(updateCourseRequest);
@@ -73,19 +72,21 @@ namespace CourseApp.API.Controllers
                 }
 
                 return BadRequest(ModelState);
-            }
-            return NotFound();
         }
 
         [HttpDelete("{id}")]
+        [IsExists]
         public async Task<IActionResult> Delete(int id)
         {
-            if (await courseService.CourseIsExist(id))
-            {
                 await courseService.DeleteAsync(id);
                 return Ok();
-            }
-            return NotFound();
+        }
+
+        [HttpGet("[action]")]
+        [NotImplemented]
+        public async Task<IActionResult> Bitmemis(int id)
+        {
+            throw new NotImplementedException();
         }
 
 
