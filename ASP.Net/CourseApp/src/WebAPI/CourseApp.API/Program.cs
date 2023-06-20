@@ -1,4 +1,5 @@
 using CourseApp.API.Extensions;
+using CourseApp.API.Security;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -10,6 +11,9 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 var connectionString = builder.Configuration.GetConnectionString("db");
+
+builder.Services.AddAuthentication("Basic").AddScheme<BasicOption,BasicHandler>("Basic",null);
+
 builder.Services.AddInjections(connectionString);//extension yazdýk.(IoC Extensions)
 
 builder.Services.AddCors(opt =>
@@ -35,6 +39,7 @@ if (app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 app.UseCors("allow");
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();

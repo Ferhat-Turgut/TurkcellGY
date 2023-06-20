@@ -17,6 +17,9 @@
                 $.ajax({
                     url:'https://localhost:7079/api/Courses',
                     type:'GET',
+                    headers:{
+                        'Authorization' : 'Basic ' + btoa('ft3065:123')
+                    },
                     success: function(data){
                         $.each(data,function(index,element){
                             let h3 = $('<h3>' + element.name + '</h3>');

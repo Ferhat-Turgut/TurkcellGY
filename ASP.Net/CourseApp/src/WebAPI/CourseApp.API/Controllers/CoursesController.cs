@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using CourseApp.Services;
 using CourseApp.DataTransferObjects.Requests;
 using CourseApp.API.Filters;
+using Microsoft.AspNetCore.Authorization;
 
 namespace CourseApp.API.Controllers
 {
@@ -17,7 +18,7 @@ namespace CourseApp.API.Controllers
         {
             this.courseService = courseService;
         }
-
+        [Authorize]
         [HttpGet]
         public IActionResult GetCourses()
         {
