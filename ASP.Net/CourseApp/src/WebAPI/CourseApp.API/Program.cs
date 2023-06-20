@@ -12,6 +12,15 @@ builder.Services.AddSwaggerGen();
 var connectionString = builder.Configuration.GetConnectionString("db");
 builder.Services.AddInjections(connectionString);//extension yazdýk.(IoC Extensions)
 
+builder.Services.AddCors(opt =>
+{
+    opt.AddPolicy("allow", builder =>
+    {
+        builder.AllowAnyHeader();
+        builder.AllowAnyMethod();
+        builder.AllowAnyOrigin();
+    });
+});
 var app = builder.Build();
 
 
@@ -24,6 +33,7 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+app.UseCors("allow");
 
 app.UseAuthorization();
 
