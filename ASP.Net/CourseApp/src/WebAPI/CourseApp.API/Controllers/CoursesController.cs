@@ -18,7 +18,7 @@ namespace CourseApp.API.Controllers
         {
             this.courseService = courseService;
         }
-        [Authorize]
+        //[Authorize]
         [HttpGet]
         public IActionResult GetCourses()
         {
@@ -52,6 +52,7 @@ namespace CourseApp.API.Controllers
         }
 
         [HttpPost]
+        [Authorize]
         public async Task<IActionResult> Create(CreateNewCourseRequest request)
         {
             if (ModelState.IsValid)
