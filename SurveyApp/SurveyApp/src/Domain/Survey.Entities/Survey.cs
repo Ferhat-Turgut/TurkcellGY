@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using SurveyApp.Entities;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Security.Principal;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Survey.Entities
 {
@@ -16,10 +11,10 @@ namespace Survey.Entities
         public int Id { get; set; }
         [Required]
         public string Tittle { get; set; }
+        public string Link { get; set; }
         public int UserId { get; set; }
         public User User { get; set; }
         [Required]
         public List<Question> Questions { get; set; }
-        public List<Answer>? Answers { get; set; } // Anketteki cevaplar
     }
 }

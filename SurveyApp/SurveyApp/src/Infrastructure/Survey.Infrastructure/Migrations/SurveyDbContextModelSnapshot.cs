@@ -36,14 +36,9 @@ namespace Survey.Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("SurveyId")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
 
                     b.HasIndex("QuestionId");
-
-                    b.HasIndex("SurveyId");
 
                     b.ToTable("Answers");
                 });
@@ -103,6 +98,10 @@ namespace Survey.Infrastructure.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<string>("Link")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Tittle")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -148,15 +147,7 @@ namespace Survey.Infrastructure.Migrations
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
-                    b.HasOne("Survey.Entities.TheSurvey", "Survey")
-                        .WithMany("Answers")
-                        .HasForeignKey("SurveyId")
-                        .OnDelete(DeleteBehavior.NoAction)
-                        .IsRequired();
-
                     b.Navigation("Question");
-
-                    b.Navigation("Survey");
                 });
 
             modelBuilder.Entity("Survey.Entities.AnswerOption", b =>
@@ -199,8 +190,6 @@ namespace Survey.Infrastructure.Migrations
 
             modelBuilder.Entity("Survey.Entities.TheSurvey", b =>
                 {
-                    b.Navigation("Answers");
-
                     b.Navigation("Questions");
                 });
 

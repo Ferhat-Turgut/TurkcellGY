@@ -12,7 +12,9 @@ namespace Survey.Infrastructure
         public DbSet<AnswerOption> AnswerOptions { get; set; }
         public DbSet<Answer> Answers { get; set; }
 
-        
+        public SurveyDbContext(DbContextOptions<SurveyDbContext> options) : base(options)
+        {
+        }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
 
@@ -37,12 +39,7 @@ namespace Survey.Infrastructure
                 .HasForeignKey(ao => ao.QuestionId)
                 .OnDelete(DeleteBehavior.NoAction);
 
-            // Survey - Answer ilişkisi
-            modelBuilder.Entity<Answer>()
-                .HasOne(a => a.Survey)
-                .WithMany(s => s.Answers)
-                .HasForeignKey(a => a.SurveyId)
-                .OnDelete(DeleteBehavior.NoAction);
+           
 
             // Question - Answer ilişkisi
             modelBuilder.Entity<Answer>()

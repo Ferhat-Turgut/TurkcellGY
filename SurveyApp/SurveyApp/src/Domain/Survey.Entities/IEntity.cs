@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Survey.Entities
+namespace SurveyApp.Entities
 {
-    public class IEntity
+    public interface IEntity
     {
     }
 }
