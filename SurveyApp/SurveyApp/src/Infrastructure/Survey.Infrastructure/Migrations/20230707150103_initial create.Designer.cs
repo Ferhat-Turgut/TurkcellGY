@@ -8,11 +8,11 @@ using Survey.Infrastructure;
 
 #nullable disable
 
-namespace Survey.Infrastructure.Migrations
+namespace SurveyApp.Infrastructure.Migrations
 {
     [DbContext(typeof(SurveyDbContext))]
-    [Migration("20230705124152_fix SurveyTable")]
-    partial class fixSurveyTable
+    [Migration("20230707150103_initial create")]
+    partial class initialcreate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -101,10 +101,6 @@ namespace Survey.Infrastructure.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("Link")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("Tittle")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -145,9 +141,9 @@ namespace Survey.Infrastructure.Migrations
             modelBuilder.Entity("Survey.Entities.Answer", b =>
                 {
                     b.HasOne("Survey.Entities.Question", "Question")
-                        .WithMany()
+                        .WithMany("Answers")
                         .HasForeignKey("QuestionId")
-                        .OnDelete(DeleteBehavior.NoAction)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Question");
@@ -158,7 +154,7 @@ namespace Survey.Infrastructure.Migrations
                     b.HasOne("Survey.Entities.Question", "Question")
                         .WithMany("AnswerOptions")
                         .HasForeignKey("QuestionId")
-                        .OnDelete(DeleteBehavior.NoAction)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Question");
@@ -169,7 +165,7 @@ namespace Survey.Infrastructure.Migrations
                     b.HasOne("Survey.Entities.TheSurvey", "Survey")
                         .WithMany("Questions")
                         .HasForeignKey("SurveyId")
-                        .OnDelete(DeleteBehavior.NoAction)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Survey");
@@ -180,7 +176,7 @@ namespace Survey.Infrastructure.Migrations
                     b.HasOne("Survey.Entities.User", "User")
                         .WithMany("Surveys")
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.NoAction)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("User");
@@ -189,6 +185,8 @@ namespace Survey.Infrastructure.Migrations
             modelBuilder.Entity("Survey.Entities.Question", b =>
                 {
                     b.Navigation("AnswerOptions");
+
+                    b.Navigation("Answers");
                 });
 
             modelBuilder.Entity("Survey.Entities.TheSurvey", b =>

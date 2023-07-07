@@ -13,6 +13,10 @@ namespace SurveyApp.API.Extensions
 
             services.AddScoped<ISurveyService, SurveyService>();
             services.AddScoped<ISurveyRepository, EFSurveyRepository>();
+
+            services.AddScoped<IUserService, UserService>();
+            services.AddScoped<IUserRepository, EFUserRepository>();
+
             services.AddAutoMapper(typeof(MapProfile));
             //IoC
             services.AddDbContext<SurveyDbContext>(opt => opt.UseSqlServer(connectionString));

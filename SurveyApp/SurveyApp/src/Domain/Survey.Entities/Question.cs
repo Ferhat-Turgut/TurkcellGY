@@ -16,5 +16,7 @@ namespace Survey.Entities
         [Required]
         public AnswerType AnswerType { get; set; }
         public List<AnswerOption>? AnswerOptions { get; set; }
+        public List<Answer>? Answers { get; set; }
+
     }
 }

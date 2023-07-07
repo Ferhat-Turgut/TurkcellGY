@@ -1,21 +1,24 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using SurveyApp.Mvc.Models;
+using SurveyApp.Services;
 using System.Diagnostics;
 
 namespace SurveyApp.Mvc.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
+        
+        private readonly ISurveyService _surveyService;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController( ISurveyService surveyService)
         {
-            _logger = logger;
+            _surveyService = surveyService;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            return View();
+            var surveys = await _surveyService.GetAllAsync();
+            return View(surveys);
         }
 
         public IActionResult Privacy()

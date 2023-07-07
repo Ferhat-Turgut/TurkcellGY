@@ -1,5 +1,6 @@
 ﻿using Survey.Entities;
 using SurveyApp.DataTransferObjects.Requests;
+using SurveyApp.DataTransferObjects.Responses;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,8 +14,8 @@ namespace SurveyApp.Services
         TheSurvey GetSurvey(int id);
         Task <TheSurvey> GetSurveyAsync(int id);
 
-        IEnumerable<TheSurvey> GetAll();
-        Task<IEnumerable<TheSurvey>> GetAllAsync();
+        IEnumerable<TheSurveyDisplayResponse> GetAll();
+        Task<IEnumerable<TheSurveyDisplayResponse>> GetAllAsync();
 
         int CreateSurveyAndReturnId(CreateNewSurveyRequest createNewSurveyRequest);
         Task<int> CreateSurveyAndReturnIdAsync(CreateNewSurveyRequest createNewSurveyRequest);

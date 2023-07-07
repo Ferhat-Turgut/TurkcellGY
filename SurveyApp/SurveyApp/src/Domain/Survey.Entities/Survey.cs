@@ -11,7 +11,6 @@ namespace Survey.Entities
         public int Id { get; set; }
         [Required]
         public string Tittle { get; set; }
-        public string Link { get; set; }
         public int UserId { get; set; }
         public User User { get; set; }
         [Required]

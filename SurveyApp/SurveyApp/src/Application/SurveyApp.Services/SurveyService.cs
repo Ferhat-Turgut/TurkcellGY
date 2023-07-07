@@ -1,47 +1,62 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Http;
 using Survey.Entities;
 using SurveyApp.DataTransferObjects.Requests;
+using SurveyApp.DataTransferObjects.Responses;
 using SurveyApp.Infrastructure.Repositories;
+using SurveyApp.Services.Extensions;
+using System.Security.Claims;
 
 namespace SurveyApp.Services
 {
     public class SurveyService : ISurveyService
     {
         private readonly ISurveyRepository _repository;
+        private readonly IHttpContextAccessor _httpContextAccessor;
         private readonly IMapper _mapper;
 
-        public SurveyService(ISurveyRepository repository, IMapper mapper)
+        public SurveyService(ISurveyRepository repository, IHttpContextAccessor httpContextAccessor, IMapper mapper)
         {
             _repository = repository;
+            _httpContextAccessor = httpContextAccessor;
             _mapper = mapper;
         }
 
         public int CreateSurveyAndReturnId(CreateNewSurveyRequest createNewSurveyRequest)
         {
+            var claim = _httpContextAccessor.HttpContext.User.FindFirst(ClaimTypes.Name);
+
+            var userId = claim.Value;
             var survey = _mapper.Map<TheSurvey>(createNewSurveyRequest);
+            survey.UserId = Convert.ToInt32(userId);
             _repository.Create(survey);
+
             return survey.Id;
         }
 
         public async Task<int> CreateSurveyAndReturnIdAsync(CreateNewSurveyRequest createNewSurveyRequest)
         {
             var survey = _mapper.Map<TheSurvey>(createNewSurveyRequest);
-            survey.Tittle = createNewSurveyRequest.Tittle;
-            survey.UserId = 1;
-            survey.Link = "sada";
+
+            var claim = _httpContextAccessor.HttpContext.User.FindFirst(ClaimTypes.Name);
+            var userId=claim.Value;
+            survey.UserId = Convert.ToInt32(userId);
             await _repository.CreateAsync(survey);
             return survey.Id;
         }
 
-        public IEnumerable<TheSurvey> GetAll()
+        public IEnumerable<TheSurveyDisplayResponse> GetAll()
         {
-
-            return _repository.GetAll();
+            var surveys = _repository.GetAll();
+            var response = surveys.ConvertToDisplayResponses(_mapper);
+            return response;
         }
 
-        public async Task<IEnumerable<TheSurvey>> GetAllAsync()
+        public async Task<IEnumerable<TheSurveyDisplayResponse>> GetAllAsync()
         {
-            return await _repository.GetAllAsync();
+            var surveys = await _repository.GetAllAsync();
+            var response = surveys.ConvertToDisplayResponses(_mapper);
+            return response;
         }
 
         public TheSurvey GetSurvey(int id)
@@ -50,9 +65,10 @@ namespace SurveyApp.Services
             return survey;
         }
 
-        public Task<TheSurvey> GetSurveyAsync(int id)
+        public async Task<TheSurvey> GetSurveyAsync(int id)
         {
-            throw new NotImplementedException();
+            var survey = await _repository.GetAsync(id);
+            return survey;
         }
     }
 }

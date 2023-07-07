@@ -1,7 +1,7 @@
-﻿using Microsoft.AspNetCore.Cors.Infrastructure;
-using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http.Extensions;
 using Microsoft.AspNetCore.Mvc;
-using Survey.Entities;
+using Microsoft.AspNetCore.Mvc.Routing;
 using SurveyApp.DataTransferObjects.Requests;
 using SurveyApp.Services;
 
@@ -18,25 +18,18 @@ namespace SurveyApp.API.Controllers
             _surveyService = surveyService;
         }
 
-        [HttpGet("{id:int}")]
-        public async Task<IActionResult> GetSurvey(int id)
-        {
-            var survey =await _surveyService.GetSurveyAsync(id);
-            if (survey == null)
-            {
-                return NotFound();
-            }
-            return Ok(survey);
-        }
+        
 
-        [HttpPost]
-        public async Task<IActionResult> Create(CreateNewSurveyRequest createNewSurveyRequest)
+        [HttpPost("create")]
+        [Authorize]
+        public async Task<IActionResult> CreateAsync(CreateNewSurveyRequest createNewSurveyRequest)
         {
             if (ModelState.IsValid)
             {
                 
                 var lastSurveyId = await _surveyService.CreateSurveyAndReturnIdAsync(createNewSurveyRequest);
-                return CreatedAtAction(nameof(GetSurvey), routeValues: new { id = lastSurveyId }, null);
+                var returnUrl = $"https://localhost:7101/AnswerSurvey/AnswerTheSurvey/{lastSurveyId}";
+                return Ok(new { returnUrl });
 
             }
             return BadRequest(ModelState);

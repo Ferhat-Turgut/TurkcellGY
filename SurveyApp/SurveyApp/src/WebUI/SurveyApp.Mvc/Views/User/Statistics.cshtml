@@ -1,0 +1,43 @@
+﻿@model IEnumerable<Survey.Entities.TheSurvey>
+
+@foreach (var survey in Model)
+{
+    <h3>Anket Adı: @survey.Tittle</h3>
+    <table style="border-collapse: collapse; width: 100%;">
+        <tr>
+            <th style="border: 1px solid black; padding: 8px;">Soru</th>
+            <th style="border: 1px solid black; padding: 8px;">Cevap</th>
+            <th style="border: 1px solid black; padding: 8px;">Adet</th>
+            <th style="border: 1px solid black; padding: 8px;">Yüzde</th>
+        </tr>
+
+        @{
+            int questionCount = 0;
+        }
+
+        @foreach (var question in survey.Questions)
+        {
+            <tr>
+                <td colspan="4" style="border: 1px solid black; padding: 8px;">@($"{(questionCount + 1)}. Soru: {question.QuestionText}")</td>
+            </tr>
+
+            var uniqueAnswers = question.Answers.Select(a => a.Response).Distinct();
+            var totalAnswers = question.Answers.Count();
+
+            foreach (var answer in uniqueAnswers)
+            {
+                var answerCount = question.Answers.Count(a => a.Response == answer);
+                var answerPercentage = (double)answerCount / totalAnswers * 100;
+
+                <tr>
+                    <td style="border: 1px solid black; padding: 8px;"></td>
+                    <td style="border: 1px solid black; padding: 8px;">@answer</td>
+                    <td style="border: 1px solid black; padding: 8px;">@answerCount</td>
+                    <td style="border: 1px solid black; padding: 8px;">@answerPercentage.ToString("0.##")%</td>
+                </tr>
+            }
+
+            questionCount++;
+        }
+    </table>
+}

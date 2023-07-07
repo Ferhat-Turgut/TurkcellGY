@@ -19,13 +19,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SurveyApp.API", "src\WebAPI
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Application", "Application", "{3EEB1F64-2370-44FC-AD45-A8D96B485FB3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SurveyApp.Services", "src\Application\SurveyApp.Services\SurveyApp.Services.csproj", "{417552A5-26EC-4304-9F0D-2F890B76EFD2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SurveyApp.Services", "src\Application\SurveyApp.Services\SurveyApp.Services.csproj", "{417552A5-26EC-4304-9F0D-2F890B76EFD2}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "WebUI", "WebUI", "{AA925299-68B8-4EEF-A7D4-CBCF9F836821}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SurveyApp.Mvc", "src\WebUI\SurveyApp.Mvc\SurveyApp.Mvc.csproj", "{634E541C-FA7C-44E5-81B7-7C6067EE62BF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SurveyApp.Mvc", "src\WebUI\SurveyApp.Mvc\SurveyApp.Mvc.csproj", "{634E541C-FA7C-44E5-81B7-7C6067EE62BF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SurveyApp.DataTransferObjects", "src\Application\SurveyApp.DataTransferObjects\SurveyApp.DataTransferObjects.csproj", "{772F707F-8E38-462C-999F-227F291C93F2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SurveyApp.DataTransferObjects", "src\Application\SurveyApp.DataTransferObjects\SurveyApp.DataTransferObjects.csproj", "{772F707F-8E38-462C-999F-227F291C93F2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

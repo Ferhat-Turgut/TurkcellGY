@@ -2,10 +2,10 @@
 
 #nullable disable
 
-namespace Survey.Infrastructure.Migrations
+namespace SurveyApp.Infrastructure.Migrations
 {
     /// <inheritdoc />
-    public partial class InitialCreate : Migration
+    public partial class initialcreate : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -40,7 +40,8 @@ namespace Survey.Infrastructure.Migrations
                         name: "FK_Surveys_Users_UserId",
                         column: x => x.UserId,
                         principalTable: "Users",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -60,7 +61,8 @@ namespace Survey.Infrastructure.Migrations
                         name: "FK_Questions_Surveys_SurveyId",
                         column: x => x.SurveyId,
                         principalTable: "Surveys",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -79,7 +81,8 @@ namespace Survey.Infrastructure.Migrations
                         name: "FK_AnswerOptions_Questions_QuestionId",
                         column: x => x.QuestionId,
                         principalTable: "Questions",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -88,7 +91,6 @@ namespace Survey.Infrastructure.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    SurveyId = table.Column<int>(type: "int", nullable: false),
                     QuestionId = table.Column<int>(type: "int", nullable: false),
                     Response = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
@@ -99,12 +101,8 @@ namespace Survey.Infrastructure.Migrations
                         name: "FK_Answers_Questions_QuestionId",
                         column: x => x.QuestionId,
                         principalTable: "Questions",
-                        principalColumn: "Id");
-                    table.ForeignKey(
-                        name: "FK_Answers_Surveys_SurveyId",
-                        column: x => x.SurveyId,
-                        principalTable: "Surveys",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
@@ -116,11 +114,6 @@ namespace Survey.Infrastructure.Migrations
                 name: "IX_Answers_QuestionId",
                 table: "Answers",
                 column: "QuestionId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Answers_SurveyId",
-                table: "Answers",
-                column: "SurveyId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Questions_SurveyId",

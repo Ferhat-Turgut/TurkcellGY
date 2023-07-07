@@ -1,0 +1,77 @@
+﻿@model Survey.Entities.TheSurvey
+
+@{
+    ViewData["Title"] = "AnswerTheSurvey";
+}
+<style>
+    .rating-select {
+        padding: 5px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+    }
+</style>
+
+<h1>Anket Cevapla</h1>
+
+<h2>@Model.Tittle</h2>
+
+<form method="post" action="AnswerTheSurvey">
+    <table class="table">
+        <thead>
+        </thead>
+        <tbody>
+            @{
+                int questionCount = 0;
+            }
+
+            @foreach (var question in Model.Questions)
+            {
+                questionCount++;
+                <tr>
+                    <td>@questionCount .Soru</td>
+                    <td>@question.QuestionText</td>
+                </tr>
+
+                <tr>
+                    <td></td>
+                    <td>
+                        @if (question.AnswerType == Survey.Entities.AnswerType.SingleLineText)
+                        {
+                            <input type="text" name="Responses[@question.Id]" required placeholder="Tek satırlık metin giriniz">
+                        }
+                        else if (question.AnswerType == Survey.Entities.AnswerType.MultiLineText)
+                        {
+                            <textarea name="Responses[@question.Id]" rows="4" required placeholder="Çok satırlı metin giriniz"></textarea>
+                        }
+                        else if (question.AnswerType == Survey.Entities.AnswerType.RatingScale)
+                        {
+                            <div class="rating-select">
+                                <select name="Responses[@question.Id]" required>
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5</option>
+                                    <option value="6">6</option>
+                                    <option value="7">7</option>
+                                    <option value="8">8</option>
+                                    <option value="9">9</option>
+                                    <option value="10">10</option>
+                                </select>
+                            </div>
+                        }
+                        else if (question.AnswerType == Survey.Entities.AnswerType.MultipleChoice)
+                        {
+                            foreach (var item in question.AnswerOptions)
+                            {
+                                <input type="radio" id="@item.Id" name="Responses[@question.Id]" value="@item.Option" required>
+                                <label for="@item.Id">@item.Option</label>
+                            }
+                        }
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <input type="submit" value="Cevapları Gönder" />
+</form>

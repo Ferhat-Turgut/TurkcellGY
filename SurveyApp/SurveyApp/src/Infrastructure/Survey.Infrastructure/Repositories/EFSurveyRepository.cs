@@ -32,11 +32,14 @@ namespace SurveyApp.Infrastructure.Repositories
 
         public TheSurvey? Get(int id)
         {
-            return surveyDbContext.Surveys.SingleOrDefault(s=>s.Id==id);
+            var survey = surveyDbContext.Surveys.Include(s => s.Questions).ThenInclude(a => a.AnswerOptions).FirstOrDefault(s => s.Id == id);
+            return survey;
+
         }
         public async Task<TheSurvey?> GetAsync(int id)
         {
-            return await surveyDbContext.Surveys.SingleOrDefaultAsync(s => s.Id == id);
+            var survey =await surveyDbContext.Surveys.Include(s => s.Questions).ThenInclude(a => a.AnswerOptions).FirstOrDefaultAsync(s => s.Id == id);
+            return survey;
         }
 
         public IEnumerable<TheSurvey?> GetAll()
